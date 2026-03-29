@@ -9,14 +9,14 @@
     <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Kosugi+Maru&family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
     <style>
         :root{
-            --main: #0e0;
+            --main: #0f0;
             scroll-behavior: smooth;
+            font-size: 17px;
         }
         body{
             margin: 0;
             background: #000;
             color: var(--main);
-            font-size: 20px;
             font-family: "DotGothic16", sans-serif;
             font-weight: 400;
             font-style: normal;
@@ -32,14 +32,49 @@
         }
 
         nav{
-            width: clamp(200px,60vw,700px);
+            width: clamp(200px,70%,400px);
             margin: 2rem auto;
-            border: solid var(--main) 2px;
+            border: solid 2px;
             background: #888;
         }
         nav .nav-top{
             border-bottom: solid 1px var(--main);
             font-size: 1.6rem;
+        }
+        nav a{color:#fff}
+
+        main{
+            width: clamp(150px,80vw,800px);
+            margin: 0 auto;
+            display: grid;
+            justify-items: center;
+        }
+
+        article{
+        }
+
+        article h2{
+            border-left: solid 10px;
+            padding-left: 1rem;
+        }
+        article h3{
+            border-bottom: solid 1px;
+        }
+        article section{
+            margin: .3em;
+            padding: .5em 1em;
+            background: #eee;
+            color: #000;
+        }
+        article section iframe{
+            width: 350px;
+            height: 500px;
+            margin: 0 auto;
+            border: none;
+        }
+        footer{
+            background: #444;
+            border-top: solid 2px;
         }
     </style>
 </head>
@@ -47,37 +82,38 @@
     <header>
         <div class="h-title">CSS電卓特設サイト</h1>
     </header>
-    <nav>
-        <div class="nav-top">INDEX</div>
-        <a href="#article-01"><div>css電卓とは</div></a>
-        <a href="#aa"><div>コード解説</div></a>
-        <a href="#aa"><div>歴史</div></a>
-        <a href="#aa"><div>その他</div></a>
-        <a href="#aa"><div>最新の電卓を特別に公開！</div></a>
-    </nav>
     <main>
+        <nav>
+            <div class="nav-top">INDEX</div>
+            <a href="#article-01"><div>css電卓とは</div></a>
+            <a href="#article-02"><div>コード解説</div></a>
+            <a href="#article-03"><div>歴史</div></a>
+            <a href="#article-04"><div>関連作品</div></a>
+            <a href="#article-05"><div>最新の電卓を特別に公開！</div></a>
+        </nav>
         <article id="article-01">
             <h2>CSS電卓とは</h2>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
-            <h3>CSS電卓とは</h3>
+            <section>
+                <p>Javascriptを使用せず、HTMLとCSSだけで実現する電卓の総称です。</p>
+            </section>
+            <h3>本当に計算できるの？</h3>
+            <section>
+                <p>まずは実物をお見せします。</p>
+                <iframe src="calc_0.html"></iframe>
+            </section>
+            <h3>目的</h3>
+            <section>HTMLとCSSの限界に挑戦したかった。</section>
+            <h3>概要</h3>
+            <section>何度もリファクタリングを繰り返して</section>
+            <h3>どうやって作った？</h3>
+            <section>aa</section>
         </article>
+        <article id="article-02"></article>
+        <article id="article-03"></article>
+        <article id="article-04"></article>
+        <article id="article-05"></article>
     </main>
-    <div>HTMLとCSSの限界</div>
+    <aside></aside>
+    <footer>&copy; 2026 cascade-path</footer>
 </body>
 </html>

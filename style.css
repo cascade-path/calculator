@@ -143,3 +143,34 @@
         .calc-wrap .result::after {
             content: counter(n);
         }
+
+        :has([name="x"]:nth-child(1):checked) .test0-x::before{content:"1"}
+        :has([name="x"]:nth-child(2):checked) .test0-x::before{content:"2"}
+        :has([name="x"]:nth-child(3):checked) .test0-x::before{content:"3"}
+        :has([name="x"]:nth-child(4):checked) .test0-x::before{content:"4"}
+        :has([name="x"]:nth-child(5):checked) .test0-x::before{content:"5"}
+        :has([name="x"]:nth-child(6):checked) .test0-x::before{content:"6"}
+        :has([name="x"]:nth-child(7):checked) .test0-x::before{content:"7"}
+        :has([name="x"]:nth-child(8):checked) .test0-x::before{content:"8"}
+        :has([name="x"]:nth-child(9):checked) .test0-x::before{content:"9"}
+        :has([name="x"]:nth-child(10):checked) .test0-x::before{content:"0"}
+        :has([name="c"]:nth-child(1):checked) .test0-c::before{content:"+"}
+        :has([name="c"]:nth-child(2):checked) .test0-c::before{content:"-"}
+        :has([name="c"]:nth-child(3):checked) .test0-c::before{content:"×"}
+        :has([name="c"]:nth-child(4):checked) .test0-c::before{content:"÷"}
+        :has([name="y"]:nth-child(1):checked) .test0-y::before{content:"1"}
+        :has([name="y"]:nth-child(2):checked) .test0-y::before{content:"2"}
+        :has([name="y"]:nth-child(3):checked) .test0-y::before{content:"3"}
+        :has([name="y"]:nth-child(4):checked) .test0-y::before{content:"4"}
+        :has([name="y"]:nth-child(5):checked) .test0-y::before{content:"5"}
+        :has([name="y"]:nth-child(6):checked) .test0-y::before{content:"6"}
+        :has([name="y"]:nth-child(7):checked) .test0-y::before{content:"7"}
+        :has([name="y"]:nth-child(8):checked) .test0-y::before{content:"8"}
+        :has([name="y"]:nth-child(9):checked) .test0-y::before{content:"9"}
+        :has([name="y"]:nth-child(10):checked) .test0-y::before{content:"0"}
+        :has([name="x"]:nth-child(10):not(:checked)):has([name="c"]:nth-child(4):checked):has([name="y"]:nth-child(10):checked){
+            .test0-y::after{
+                content: "　ゼロ徐算が検出されました!";
+                color: red;
+            }
+        }

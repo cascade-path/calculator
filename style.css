@@ -162,6 +162,7 @@
         :has([name="c"]:nth-child(2):checked) .test0-c::before{content:"-"}
         :has([name="c"]:nth-child(3):checked) .test0-c::before{content:"×"}
         :has([name="c"]:nth-child(4):checked) .test0-c::before{content:"÷"}
+        :has([name="c"]:nth-child(5):checked) .test0-c::before{content:"%"}
         :has([name="y"]:nth-child(1):checked) .test0-y::before{content:"1"}
         :has([name="y"]:nth-child(2):checked) .test0-y::before{content:"2"}
         :has([name="y"]:nth-child(3):checked) .test0-y::before{content:"3"}
@@ -172,7 +173,7 @@
         :has([name="y"]:nth-child(8):checked) .test0-y::before{content:"8"}
         :has([name="y"]:nth-child(9):checked) .test0-y::before{content:"9"}
         :has([name="y"]:nth-child(10):checked) .test0-y::before{content:"0"}
-        :has([name="x"]:nth-child(10):not(:checked)):has([name="c"]:nth-child(4):checked):has([name="y"]:nth-child(10):checked){
+        :has([name="x"]:nth-child(10):not(:checked)):is(:has([name="c"]:nth-child(4):checked),:has([name="c"]:nth-child(5):checked)):has([name="y"]:nth-child(10):checked){
             .test0-y::after{
                 content: "　ゼロ徐算が検出されました!";
                 color: red;

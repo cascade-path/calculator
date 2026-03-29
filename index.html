@@ -71,13 +71,25 @@
         }
         article section iframe{
             width: 350px;
-            height: 500px;
+            height: 440px;
             margin: 0 auto;
             border: none;
         }
+
         footer{
+            display: grid;
+            align-content: space-around;
+            justify-content: center;
+            height: 100px;
+            margin-top: 100px;
             background: #444;
             border-top: solid 2px;
+        }
+        footer div{
+            text-align: center;
+        }
+        footer a{
+            color: #fff;
         }
     </style>
 </head>
@@ -97,12 +109,14 @@
         <article id="article-01">
             <h2>CSS電卓とは</h2>
             <section>
-                <p>Javascriptを使用せず、HTMLとCSSだけで実現する電卓の総称です。</p>
+                <p>Javascriptを一切使用せず、HTMLとCSSだけで構築された電卓です。</p>
+                <p>通常、電卓のような「計算処理」や「状態管理」はJavaScriptなどのスクリプト言語が必須ですが、本作品ではCSSのみで四則演算を実現しています。</p>
             </section>
             <h3>本当に計算できるの？</h3>
             <section>
                 <p>まずは実物をお見せします。</p>
                 <iframe src="calc_0.html"></iframe>
+                <p>実際に計算してみてください。</p>
             </section>
             <h3>目的</h3>
             <section>HTMLとCSSの限界に挑戦したかった。</section>
@@ -117,11 +131,28 @@
         </article>
         <article id="article-03">
             <h2>電卓の歴史</h2>
-            <section></section>
+            <h3>初代電卓</h3>
+            <section>
+                <iframe src="calc_1.html"></iframe>
+            </section>
+            <h3>2代目電卓</h3>
+            <section>
+                <iframe src="calc_2.html"></iframe>
+            </section>
+            <h3>3代目電卓</h3>
+            <section>
+                <iframe src="calc_3.html"></iframe>
+            </section>
+            <h3>4代目電卓へ</h3>
+            <section>
+                <iframe src="calc_0.html"></iframe>
+            </section>
         </article>
         <article id="article-04">
             <h2>最新の電卓を特別に公開！</h2>
-            <section></section>
+            <section>
+                <iframe src="calc_5.html"></iframe>
+            </section>
         </article>
         <article id="article-05">
             <h2>関連作品</h2>
@@ -129,6 +160,9 @@
         </article>
     </main>
     <aside></aside>
-    <footer>&copy; 2026 cascade-path</footer>
+    <footer>
+        <div>&copy; 2026 cascade-path</div>
+        <a href="https://cascade-path.github.io/portfolio/index.html" target="_blank"><div>Cascade-path's Portfolio</div></a>
+    </footer>
 </body>
 </html>

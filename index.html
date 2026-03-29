@@ -78,6 +78,255 @@
             margin: 0 auto;
             border: none;
         }
+        article section iframe.marubatsu-frame{
+            width: 350px;
+            height: 440px;
+            margin: 0 auto;
+            border: none;
+        }
+
+        footer{
+            display: grid;
+            align-content: space-around;
+            justify-content: center;
+            height: 100px;
+            margin-top: 100px;
+            background: #444;
+            border-top: solid 2px;
+        }
+        footer div{
+            text-align: center;
+        }
+        footer a{
+            color: #fff;
+        }
+
+        /* コマンド */
+        p.p-strong{
+            padding: .5em;
+            border-radius: .3em;
+            letter-spacing: .1em;
+            background: #ccc;
+            color: #131;
+            box-shadow: 2px 2px 1px #131;
+            text-shadow: .1em .1em var(--main);
+            font-size: 1.2rem
+        }
+        p.p-code{
+            padding: .2em;
+            white-space: pre-wrap;
+            border: inset 2px var(--main);
+            line-height: 1.5em;
+            background: #222;
+            color: var(--main);
+            font-family: sans-serif;
+            user-select: all;
+        }
+        p.p-code::selection{
+            background: #0f0;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="h-title">CSS電卓特設サイト</h1>
+    </header>
+    <main>
+        <nav>
+            <div class="nav-top">INDEX</div>
+            <a href="#article-01"><div>css電卓とは</div></a>
+            <a href="#article-02"><div>仕組み・コード解説</div></a>
+            <a href="#article-03"><div>電卓の歴史</div></a>
+            <a href="#article-04"><div>最新の電卓を特別に公開！</div></a>
+            <a href="#article-05"><div>関連作品</div></a>
+        </nav>
+        <article id="article-01">
+            <h2>CSS電卓とは</h2>
+            <section>
+                <p class="p-strong">Javascriptを一切使用せず、HTMLとCSSだけで構築された電卓です。</p>
+                <p></p>
+                <p>通常、電卓のような「計算処理」や「状態管理」はJavaScriptなどのスクリプト言語が必須ですが、本作品ではCSSのみで四則演算を実現しています。</p>
+                <p>CSSって何？という方向けの、解説ページは.....</p>
+                <p>すみません、まだありません。</p>
+                <p>(このサイトの趣旨より、基礎解説は割愛させていただきます)</p>
+            </section>
+            <h3>本当に計算できるの？</h3>
+            <section>
+                <p>まずは実物をお見せします。</p>
+                <iframe src="calc_0.html" class="calc-frame"></iframe>
+                <p>実際に計算してみてください。</p>
+                <p>3桁の数同士の四則演算はできましたか？</p>
+                <p>※挙動はブラウザによって変わりますが、Chromium系でバグが最小になります。</p>
+            </section>
+            <h3>目的</h3>
+            <section>
+                <p class="p-strong">CSSの限界を知りたい</p>
+                <p>「制約下でのUI/UX設計」「ボタンの押下状態の管理をCSSで行う」これらをテーマに挑戦しました。</p>
+            </section>
+            <h3>概要</h3>
+            <section>
+                <p>何度もリファクタリングを繰り返して現在の形に至ります。</p>
+                <p>ブラウザによる挙動の違いや小数計算のcalc()の丸め誤差に悩まされ、CSS変数の組み合わせ方を何度も調整しました。</p>
+            </section>
+            <h3>どうやって作った？</h3>
+            <section>
+                <p>後ほど詳細な試行錯誤の過程を記述しますが、ここでは手短にまとめます。</p>
+                <p class="p-strong">忙しい人以外はこのセクションをパスしてください</p>
+                <p>(まだ準備中なので...)</p>
+            </section>
+        </article>
+        <article id="article-02">
+            <h2>仕組み・コード解説</h2>
+            <section>
+                <p>勿体ぶらずに、まずはコードを出します。</p>
+                <p class="p-code">&lt;img&gt;</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>...出したいです</p>
+                <p>(サイトが未完成なのでしばらくお待ちください。)</p>
+                <p>.</p>
+                <p>追記 )) 全部コードを書くには余白が狭すぎました...</p>
+            </section>
+            <section>
+                <p class="p-strong">ここからは前述(?)のコードを4つに分けて解説していきます。</p></section>
+            <h3>a.入力</h3>
+            <section>
+                <p class="p-strong">ラジオボタンを使って入力状態を管理します。</p>
+                <p class="p-code">&lt;input type="radio" name="x01"&gt;</p>
+                <p>この電卓ではこのラジオボタンを百個以上使うことによって、10240000000000000000通りの計算を表現できます。</p>
+            </section>
+            <h3>b.演算</h3>
+            <section>
+                <p class="p-strong">擬似クラス「:checked」で入力状態を判定</p>
+                <p>擬似クラス「:has()」とも併せて使います</p>
+                <p class="p-strong">入力状態に応じたCSS変数を:rootに指定</p>
+                <p class="p-code">:has([data-x].p01:checked) {
+    --x01: 3;
+}</p>
+                <p class="p-strong">CSSカウンターで計算</p>
+                <p>詳細については準備中です</p>
+                <p class="p-code"></p>
+            </section>
+            <h3>c.出力</h3>
+            <section>
+                <p>電卓の上部には計算結果を表示するエリアがあります。</p>
+                <p class="p-strong">CSS変数による演算結果を文字に起こす過程にも苦労しました。</p>
+                <p>計算結果ごとに表示を指定する原始的なものから、CSSアニメーションによる回りくどいもの、CSSカウンターによる画期的なものまで様々です。</p>
+                <p>ゼロ徐算の表示にも注目してみてください。</p>
+            </section>
+            <h3>d.UI</h3>
+            <section>
+                <p>計算の精度だけでなく、UIもこだわり抜きました。</p>
+                <p>この電卓にはラジオボタンが百個以上使われていますが、</p>
+                <p class="p-strong">入力状態に応じてボタンの表示状態を変更</p>
+                <p>したり、disabled化しています。</p>
+                <p>*コード単純化の観点から、ラジオボタンにラッパーをつけずに変形させてボタンにしています。</p>
+                <p class="p-strong">リセットボタンなど特殊ボタンの実装</p>
+                <p>、そしてグリッドレイアウトを基盤としたデザインの進化にも注目してみてください。</p>
+            </section>
+        </article>
+        <article id="article-03">
+            <h2>電卓の歴史</h2>
+            <h3>初代電卓</h3>
+            <section>
+                <iframe src="calc_1.html" class="calc-frame"></iframe>
+                <p>かけ算のみ計算できます。</p>
+                <p class="p-strong">計算結果を「要素の幅」に設定、@containerで参照</p>
+                <p>ダミー要素の幅をcss変数のcalc()の形で指定し、その幅を@containerで取得し、条件分岐して計算結果を表示しています。</p>
+                <p class="p-strong">3*4でも、6*2でも同じ分岐にたどり着きます。</p>
+                <p>これだと計算結果の数だけコード量が増えてしまいますよね。。</p>
+            </section>
+            <h3>2代目電卓</h3>
+            <section>
+                <iframe src="calc_2.html" class="calc-frame"></iframe>
+                <p class="p-strong"></p>
+                <p>contentプロパティをcssアニメーションで切り替え、そのanimation-iterationcountをcss変数で制御するものです。</p></p>
+            </section>
+            <h3>3代目電卓</h3>
+            <section>
+                <iframe src="calc_3.html" class="calc-frame"></iframe>
+                <p>計算結果が負の数になる場合を対応しました。</p>
+            </section>
+            <h3>4代目電卓へ</h3>
+            <section>
+                <iframe src="calc_0.html" class="calc-frame"></iframe>
+                <p>UIを一新し、より電卓らしくなりました。</p>
+                <p>整数部分の計算はcssカウンターによる計算に変更しました。</p>
+                <p>小数部分はcssアニメーションを使用しています。</p>
+            </section>
+        </article>
+        <article id="article-04">
+            <h2>最新の電卓を特別に公開！</h2>
+            <section>
+                <iframe src="calc_5.html" class="calc-frame"></iframe>
+                <p class="p-strong">小数同士の計算ができます。</p>
+                <p class="p-strong">入力を消す機能「⌫」も実装しました！</p>
+                <p>さて、ボタンが1つだけ余りましたね ( 「?」のボタン、拡張用 )。</p>
+                <p>良い使い道が見つかりましたら今後実装していこうと思いますので今後もよろしくお願いします!!</p>
+            </section>
+        </article>
+        <article id="article-05">
+            <h2>関連作品</h2>
+            <section>
+                <p>CSSの限界を試す作品は他にもあります！</p>
+                <p>診断サイト、乱数発生器、SPA、まるばつゲームほか...近日公開予定</p>
+                <p>今後の当サイトの発展にご期待ください。</p>
+                <iframe src="marubatsu.html" class="marubatsu-frame"></iframe>
+            </section>
+        </article>
+    </main>
+    <aside></aside>
+    <footer>
+        <div>&copy; 2026 cascade-path</div>
+        <a href="https://cascade-path.github.io/portfolio/index.html" target="_blank"><div>Cascade-path's Portfolio</div></a>
+    </footer>
+</body>
+</html>            border: solid 2px;
+            background: #888;
+        }
+        nav .nav-top{
+            border-bottom: solid 1px var(--main);
+            font-size: 1.6rem;
+        }
+        nav a{color:#fff}
+        nav a:hover{
+            text-shadow: .1em .1em var(--main);
+        }
+        nav a div{margin: .3rem}
+
+        main{
+            width: clamp(150px,80vw,800px);
+            margin: 0 auto;
+            display: grid;
+            justify-items: center;
+        }
+
+        article{
+            width: 100%;
+            margin-block: 2rem;
+        }
+
+        article h2{
+            border-left: solid 10px;
+            padding-left: 1rem;
+        }
+        article h3{
+            border-bottom: solid 1px;
+        }
+        article section{
+            margin: .3em;
+            padding: .5em 1em;
+            background: #eee;
+            color: #000;
+        }
+        article section iframe.calc-frame{
+            width: 350px;
+            height: 440px;
+            margin: 0 auto;
+            border: none;
+        }
 
         footer{
             display: grid;

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>まるばつゲーム</title>
+</head>
+<body style="scale:.7;translate:-80px -30px">
+    <input id="cell000" type="checkbox">
+<input id="cell001" type="checkbox">
+<input id="cell002" type="checkbox">
+<input id="cell010" type="checkbox">
+<input id="cell011" type="checkbox">
+<input id="cell012" type="checkbox">
+<input id="cell020" type="checkbox">
+<input id="cell021" type="checkbox">
+<input id="cell022" type="checkbox">
+<input id="cell100" type="checkbox">
+<input id="cell101" type="checkbox">
+<input id="cell102" type="checkbox">
+<input id="cell110" type="checkbox">
+<input id="cell111" type="checkbox">
+<input id="cell112" type="checkbox">
+<input id="cell120" type="checkbox">
+<input id="cell121" type="checkbox">
+<input id="cell122" type="checkbox">
+
+<p id="message">　</p>
+
+<div id="board0">
+<label for="cell000"></label>
+<label for="cell001"></label>
+<label for="cell002"></label>
+<label for="cell010"></label>
+<label for="cell011"></label>
+<label for="cell012"></label>
+<label for="cell020"></label>
+<label for="cell021"></label>
+<label for="cell022"></label>
+</div>
+<div id="board1">
+<label for="cell100"></label>
+<label for="cell101"></label>
+<label for="cell102"></label>
+<label for="cell110"></label>
+<label for="cell111"></label>
+<label for="cell112"></label>
+<label for="cell120"></label>
+<label for="cell121"></label>
+<label for="cell122"></label>
+</div>
+<svg id="circle00"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="circle01"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="circle02"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="circle10"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="circle11"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="circle12"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="circle20"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="circle21"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="circle22"><circle r="30" cy="50" cx="50" fill="#ccc"></circle></svg>
+<svg id="cross00"><line y2="80" x2="80" y1="20" x1="20"></line>
+   <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+<svg id="cross01"><line y2="80" x2="80" y1="20" x1="20"></line>
+  <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+<svg id="cross02"><line y2="80" x2="80" y1="20" x1="20"></line>
+  <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+<svg id="cross10"><line y2="80" x2="80" y1="20" x1="20"></line>
+  <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+<svg id="cross11"><line y2="80" x2="80" y1="20" x1="20"></line>
+  <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+<svg id="cross12"><line y2="80" x2="80" y1="20" x1="20"></line>
+  <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+<svg id="cross20"><line y2="80" x2="80" y1="20" x1="20"></line>
+  <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+<svg id="cross21"><line y2="80" x2="80" y1="20" x1="20"></line>
+  <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+<svg id="cross22"><line y2="80" x2="80" y1="20" x1="20"></line>
+  <line y2="20" x2="80" y1="80" x1="20" fill="#ccc"></line></svg>
+
+<style>
+input{display:none}
+#message{position:fixed;top:30px;font-weight:bold;font-size:30px}
+#board0,#board1,#board2{position:fixed;top:100px;left:50px;width:315px;padding:7px 3px 1px 7px}
+#board0{background:#000}
+label{display:inline-block;width:100px;aspect-ratio:1/1;background:#ddd}
+svg{width:100px;aspect-ratio:1/1;display:none}
+circle{fill:none;stroke:#e00;stroke-width:5px;stroke-dasharray:400;animation:circle 2s}
+line:first-child{stroke:#00e;stroke-width:5px;stroke-dasharray:400;animation:line 1s}
+line:nth-child(2){stroke:#00e;stroke-width:5px;stroke-dasharray:400;animation:line2 2s}
+
+@keyframes circle{0%{stroke-dashoffset:400}100%{stroke-dashoffset:100}}
+@keyframes line{0%{stroke-dashoffset:400}100%{stroke-dashoffset:200}}
+@keyframes line2{0%{opacity:0}29.9%{opacity:0}30%{stroke-dashoffset:400;opacity:1}100%{stroke-dashoffset:200}}
+
+#circle00,#cross00{position:fixed;top:107px;left:55px}
+#circle01,#cross01{position:fixed;top:107px;left:162px}
+#circle02,#cross02{position:fixed;top:107px;left:269px}
+#circle10,#cross10{position:fixed;top:214px;left:55px}
+#circle11,#cross11{position:fixed;top:214px;left:162px}
+#circle12,#cross12{position:fixed;top:214px;left:269px}
+#circle20,#cross20{position:fixed;top:321px;left:55px}
+#circle21,#cross21{position:fixed;top:321px;left:162px}
+#circle22,#cross22{position:fixed;top:321px;left:269px}
+
+#cell000:checked ~ #circle00{display:block}
+#cell001:checked ~ #circle01{display:block}
+#cell002:checked ~ #circle02{display:block}
+#cell010:checked ~ #circle10{display:block}
+#cell011:checked ~ #circle11{display:block}
+#cell012:checked ~ #circle12{display:block}
+#cell020:checked ~ #circle20{display:block}
+#cell021:checked ~ #circle21{display:block}
+#cell022:checked ~ #circle22{display:block}
+#cell100:checked ~ #cross00{display:block}
+#cell101:checked ~ #cross01{display:block}
+#cell102:checked ~ #cross02{display:block}
+#cell110:checked ~ #cross10{display:block}
+#cell111:checked ~ #cross11{display:block}
+#cell112:checked ~ #cross12{display:block}
+#cell120:checked ~ #cross20{display:block}
+#cell121:checked ~ #cross21{display:block}
+#cell122:checked ~ #cross22{display:block}
+
+input:checked ~ #message:after,
+input:checked ~ input:checked ~ input:checked ~ #message:after,
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #message:after,
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #message:after{content:'〇の番です'}
+input:checked ~ input:checked ~ #message:after,
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ #message:after,
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #message:after,
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #message:after{content:'×の番です'}
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #message:after{content:''}
+
+input:checked ~ #board1{display:none}
+input:checked ~ input:checked ~ #board1{display:block}
+input:checked ~ input:checked ~ input:checked ~ #board1{display:none}
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ #board1{display:block}
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #board1{display:none}
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #board1{display:block}
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #board1{display:none}
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #board1{display:block}
+input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ input:checked ~ #board1{display:none}
+</style>
+</body>
+</html>

@@ -142,6 +142,14 @@
         p.p-link:hover{
             text-decoration: underline;
         }
+
+        /*デモ用。class衝突注意*/
+        .calc-wrap :has(:checked) {
+            counter-increment: n var(--n);
+        }
+        .calc-wrap .result::after {
+            content: counter(n);
+        }
     </style>
 </head>
 <body>
@@ -289,8 +297,6 @@
                 <p class="p-strong">ブラウザ間の挙動の差を是正</p>
                 <p class="p-strong">UI大幅変更</p>
                 <p>CSSカウンターによる結果表示に切り替えました。</p>
-                <p>以下は、CSS電卓の最小構成です。</p>
-                <p class="p-code"></p>
                 <p>計算結果が負の数になる場合を対応しました。</p>
                 <p>UIの改良を行い、disabled化を</p>
             </section>
@@ -300,6 +306,70 @@
                 <p>UIを一新し、より電卓らしくなりました。</p>
                 <p>整数部分の計算はcssカウンターによる計算に変更しました。</p>
                 <p>小数部分はcssアニメーションを使用しています。</p>
+            </section>
+            <h3>番外編：最小構成の電卓</h3>
+            <section>
+                <p><div class="calc-wrap">
+    <div style="--n:1">
+        <input type="checkbox">1
+    </div>
+    <div style="--n:2">
+        <input type="checkbox">2
+    </div>
+    <div style="--n:3">
+        <input type="checkbox">3
+    </div>
+    <div style="--n:4">
+        <input type="checkbox">4
+    </div>
+    <div style="--n:5">
+        <input type="checkbox">5
+    </div>
+    <div style="--n:6">
+        <input type="checkbox">6
+    </div>
+    <div style="--n:7">
+        <input type="checkbox">7
+    </div>
+    <div style="--n:8">
+        <input type="checkbox">8
+    </div>
+    <div class="result">合計は：</div>
+</div></p>
+                <p class="p-code">&lt;div class="calc-wrap"&gt;
+    &lt;div style="--n:1"&gt;
+        &lt;input type="checkbox"&gt;1
+    &lt;/div&gt;
+    &lt;div style="--n:2"&gt;
+        &lt;input type="checkbox"&gt;2
+    &lt;/div&gt;
+    &lt;div style="--n:3"&gt;
+        &lt;input type="checkbox"&gt;3
+    &lt;/div&gt;
+    &lt;div style="--n:4"&gt;
+        &lt;input type="checkbox"&gt;4
+    &lt;/div&gt;
+    &lt;div style="--n:5"&gt;
+        &lt;input type="checkbox"&gt;5
+    &lt;/div&gt;
+    &lt;div style="--n:6"&gt;
+        &lt;input type="checkbox"&gt;6
+    &lt;/div&gt;
+    &lt;div style="--n:7"&gt;
+        &lt;input type="checkbox"&gt;7
+    &lt;/div&gt;
+    &lt;div style="--n:8"&gt;
+        &lt;input type="checkbox"&gt;8
+    &lt;/div&gt;
+    &lt;div class="result"&gt;合計は：&lt;/div&gt;
+&lt;/div&gt;</p>
+                <p class="p-code">.calc-wrap :has(:checked) {
+    counter-increment: n var(--n);
+}
+.calc-wrap .result::after {
+    content: counter(n);
+}</p>
+            <p>コードはフリーです。自由にご参照ください。</p>
             </section>
         </article>
         <article id="article-04">

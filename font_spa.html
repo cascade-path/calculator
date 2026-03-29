@@ -4,6 +4,150 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style id="reset_style">
+@import url(https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DotGothic16&family=Kiwi+Maru&family=Klee+One&family=Kosugi+Maru&family=Mochiy+Pop+P+One&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&family=Potta+One&family=Rampart+One&family=Reggae+One&family=Yuji+Boku);
+@import url(https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=New+Tegomin&family=Shippori+Antique+B1&family=Stick&family=Zen+Kurenaido);
+@import url(https://fonts.googleapis.com/css2?family=Chokokutai&family=Kaisei+HarunoUmi&family=Palette+Mosaic&family=RocknRoll+One&family=Shizuru&family=Slackside+One&family=Train+One);
+/*全体*/
+:root{--color:#0ca}
+label{display:block;cursor:pointer}
+::selection{background:#aaa}
+/*ヘッダー*/
+header{display:flex;justify-content:space-around;align-items:center;height:100px;box-shadow:0 5px 5px -5px}
+header h1{margin-left:30vw}
+/*ページ*/
+[name="page"]{display:none}
+.page{display:none;max-width:600px;margin:0 auto;padding:30px;overflow:hidden}
+.page:has([name="page"]:checked){display:block}
+:has(#log:checked) [for="login"],
+:has(#log:not(:checked)) [for="logout"]{display:none}
+@media (max-width:450px){header .btn-s{display:none}}
+/*ボタン*/
+.btn{position:relative;width:280px;margin:20px auto;padding:12px 0;border-radius:10px;text-align:center;color:var(--color);font-size:18px;border:solid var(--color);transition:1s}
+.btn::before{content:'';width:0;position:absolute;inset:0;z-index:-1;border-radius:7px;background:var(--color);transition:.3s}
+.btn::after{content:'>';margin-left:10px;transition:.2s .3s}
+.btn:hover{color:#fff}
+.btn:hover::before{width:100%}
+.btn:hover::after{margin-inline:30px -20px}
+.btn-s{margin:10px;padding:10px;background:var(--color);text-align:center;border-radius:5px;color:#fff;transition:.2s}
+.btn-s:hover{filter:brightness(110%)}
+.loading{display:flex;align-items:center;justify-content:center;position:fixed;inset:0;z-index:10;animation:load 1s step-end forwards,loadback 1s}
+/*loading*/
+:has([name="page"]:active) .loading{display:none}
+.loading>*{width:100px;height:100px;aspect-ratio:0;border-radius:50%;border:solid #000;border-bottom:solid transparent;animation:loading 1s linear infinite}
+@keyframes load{to{z-index:-1;opacity:0}}
+@keyframes loadback{0%{backdrop-filter:blur(20px)}50%{backdrop-filter:blur(20px)}51%{backdrop-filter:blur(8px)}80%{backdrop-filter:blur(8px)}100%{backdrop-filter:blur(2px)}}
+@keyframes loading{to{rotate:360deg}}
+/*ボタンdisabled*/
+:has(#top:checked) [for="top"],
+:has(#logout:checked,#login:checked) [for="login"],
+:has(#logout:checked,#login:checked) [for="logout"]{pointer-events:none}
+/*トップ画面*/
+.recommend{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;height:260px;position:relative;padding:20px 20px;background:#ddd;overflow-x:scroll;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none}
+.recommend label{aspect-ratio:5/7;padding:20px;border-radius:20px;background:#fff;scroll-snap-align:start;scroll-margin:20px;container-type:scroll}
+.recommend *{font-family:var(--font);font-size:40px}
+.recommend label div::after{content:var(--font);font-size:20px}
+.recommend::-webkit-scrollbar{display:none}
+.top *{text-align:center}
+.top h2{margin-top:100px;text-align:center}
+.recommend::scroll-button(*){all:unset;display:flex;width:40px;margin-inline:-20px;padding-inline:10px;margin-inline:-30px;height:300px;margin-top:-300px;align-items:center;backdrop-filter:blur(3px);background:red;font-size:30px;cursor:pointer;transition:.3s}
+.recommend::scroll-button(*):disabled{width:20px;background:#ddd;color:transparent;pointer-events:none}
+.recommend::scroll-button(left):hover{padding-inline:0px 60px}
+.recommend::scroll-button(right):hover{padding-inline:60px 0px}
+.recommend::scroll-button(left){content:'<';float:left;background:linear-gradient(90deg,var(--color),rgba(0,0,0,0))}
+.recommend::scroll-button(right){content:'>';float:right;background:linear-gradient(90deg,rgba(0,0,0,0),var(--color))}
+@keyframes left{0%{backdrop-filter:blur(3px)}90%{backdrop-filter:blur(0px)}100%{backdrop-filter:blur(100px)}}
+@keyframes right{0%{scale:1}100%{scale:2}}
+/*@container(){}*/
+/*ログイン画面*/
+.login{display:grid;max-width:300px;margin:0 auto;font-size:20px;text-align:center}
+.login input{margin:10px;padding:10px;font-size:15px;outline:none;border:solid #ddd 5px;border-radius:8px}
+.login:has(:invalid:not(:autofill)) label{pointer-events:none;background:#aaa}
+.login:not(:has(#log:checked)) .loginP{display:none}
+.login:has(#log:checked) :not(.loginP){display:none}
+/*フォント画面*/
+.fontgrid{display:grid;grid-template-columns:repeat(3,1fr);margin:10px;margin-bottom:100px;gap:20px}
+@media(max-width:600px){.fontgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:450px){.fontgrid{grid-template-columns:1fr}}
+.font{display:grid;grid-template-rows:1fr 1fr;aspect-ratio:2/3;padding:20px;border-radius:10px;box-shadow:1px 1px 2px;transition:.3s}
+.font:hover{scale:1.05}
+.font div{font-family:var(--font)}
+.font h2{margin:3px 0}
+.font h2::before{content:var(--font);font-weight:900;font-size:20px}
+.font p::before{content:'もじモジ文字。Google Fonts';font-weight:100;font-size:14px}
+.font hr{width:100%;border:none;border-bottom:solid}
+/*購入画面*/
+.purchase{position:relative;width:100%;display:flex;justify-content:stretch;gap:20px}
+.buy-font{width:300px;--font:'存在しない商品です'}
+.buy-font{font-family:var(--font)}
+.buy-font h1::after{content:var(--font)}
+.buy-font textarea{width:90%;height:90px;padding:5%;overflow:hidden;font-size:20px;border-radius:5px;resize:none;cursor:pointer;font-family:var(--font)}
+.buy-font textarea:focus{outline:none;border-color:var(--color);transition:.3s;cursor:unset}
+.purchase-memo{flex:1;margin-top:70px;padding:20px;text-align:center;border-top:solid}
+.code{display:none;margin:40px;padding:30px 20px;background:#eee;border-radius:10px;box-shadow:1px 1px 2px;user-select:all;font-size:10px}
+.code::selection{background:var(--color);color:#fff}
+:has(#log:not(:checked)) [for="pay"]{background:#aaa;pointer-events:none}
+@media(max-width:500px){
+.purchase{display:block}
+.buy-font{width:100%;margin:0 auto}
+.buy-font h1{font-size:20px;text-align:center}
+.purchase-memo{display:flex;gap:30px;align-items:center;justify-content:center}
+}
+:has(#buy-dot:checked) .buy-font{--font:'dotGothic16'}
+:has(#buy-mochiy:checked) .buy-font{--font:'Mochiy Pop P One'}
+:has(#buy-rampart:checked) .buy-font{--font:'Rampart One'}
+:has(#buy-sans:checked) .buy-font{--font:'Noto Sans JP'}
+:has(#buy-kosugi:checked) .buy-font{--font:'Kosugi Maru'}
+:has(#buy-reggae:checked) .buy-font{--font:'Reggae One'}
+:has(#buy-klee:checked) .buy-font{--font:'Klee One'}
+:has(#buy-kiwi:checked) .buy-font{--font:'Kiwi Maru'}
+:has(#buy-potta:checked) .buy-font{--font:'Potta One'}
+:has(#buy-dela:checked) .buy-font{--font:'Dela Gothic One'}
+:has(#buy-yuji:checked) .buy-font{--font:'Yuji Boku'}
+:has(#buy-serif:checked) .buy-font{--font:'Noto Serif JP'}
+:has(#buy-tegomin:checked) .buy-font{--font:'New Tegomin'}
+:has(#buy-hachi:checked) .buy-font{--font:'Hachi Maru Pop'}
+:has(#buy-kurenaido:checked) .buy-font{--font:'Zen Kurenaido'}
+:has(#buy-shippori:checked) .buy-font{--font:'Shippori Antique B1'}
+:has(#buy-stick:checked) .buy-font{--font:'Stick'}
+:has(#buy-train:checked) .buy-font{--font:'Train One'}
+:has(#buy-rocknroll:checked) .buy-font{--font:'RocknRoll One'}
+:has(#buy-kaisei:checked) .buy-font{--font:'Kaisei HarunoUmi'}
+:has(#buy-dot:checked) .dot{display:block}
+:has(#buy-mochiy:checked) .mochiy{display:block}
+:has(#buy-rampart:checked) .rampart{display:block}
+:has(#buy-sans:checked) .sans{display:block}
+:has(#buy-kosugi:checked) .kosugi{display:block}
+:has(#buy-reggae:checked) .reggae{display:block}
+:has(#buy-klee:checked) .klee{display:block}
+:has(#buy-kiwi:checked) .kiwi{display:block}
+:has(#buy-potta:checked) .potta{display:block}
+:has(#buy-dela:checked) .dela{display:block}
+:has(#buy-yuji:checked) .yuji{display:block}
+:has(#buy-serif:checked) .serif{display:block}
+:has(#buy-tegomin:checked) .tegomin{display:block}
+:has(#buy-hachi:checked) .hachi{display:block}
+:has(#buy-kurenaido:checked) .kurenaido{display:block}
+:has(#buy-shippori:checked) .shippori{display:block}
+:has(#buy-stick:checked) .stick{display:block}
+:has(#buy-train:checked) .train{display:block}
+:has(#buy-rocknroll:checked) .rocknroll{display:block}
+:has(#buy-kaisei:checked) .kaisei{display:block}
+/*購入完了*/
+.pay,.in,.out{position:fixed;z-index:-10;bottom:5vw;left:10vw;right:10vw;padding:3vw;border-radius:2vw;background:#fff;box-shadow:2px 2px 4px;animation:pay 4s .3s;opacity:0}
+@keyframes pay{
+0%{bottom:0vw;opacity:0;z-index:10}
+20%{bottom:5vw;opacity:1;z-index:10}
+80%{bottom:5vw;opacity:1;z-index:10}
+100%{bottom:0vw;opacity:0;z-index:10}}
+:has([for="pay"]:active) .pay{display:none}
+:has(#log:active) .in{display:none}
+:has(#log:checked) .out{display:none}
+:has(#log:not(:checked)) .pay,
+:has(#log:not(:checked)) .in,
+:has(#logout:not(:checked)) .out,
+:has(#log:checked) .out{z-index:-30 !important;opacity:0 !important}
+</style>
 </head>
 <body>
     <header>
@@ -20,7 +164,10 @@
 <div class="page top">
   <input type="radio" name="page" id="top" checked="">
 <h1>こんにちは！</h1>
-  <div style="margin-bottom:70px">フォント購入サイト風SPAです。<br><div style="color:#888;font-size:10px">※ここで紹介しているフォントはすべてgoogle fontsで無償で提供されています。</div></div>
+  <div style="margin-bottom:70px">フォント購入サイト風SPAです。
+    <br><div style="color:#888;font-size:10px">※ここで紹介しているフォントはすべてgoogle fontsで無償で提供されています。</div>
+    <br><div style="color:#888;font-size:10px">※実際の支払いとは無関係ですのでご安心ください。</div>
+  </div>
 <label class="btn" for="fontlist">今すぐフォントを探す</label>
 <h2>おすすめ</h2>
 <div class="recommend">
@@ -97,7 +244,7 @@
 <input name="page" type="radio" id="buy-kaisei">
 <div class="buy-font">
 <h1></h1>
-<textarea>空想。あいうえお</textarea>
+<textarea>文字もじモジ。あいうえお</textarea>
 </div>
 <div class="purchase-memo"><h2>¥120</h2><label for="pay" class="btn-s">購入する</label></div>
 </div>
@@ -123,154 +270,5 @@
 <div class="code kaisei">@import url('https://fonts.googleapis.com/css2?family=Kaisei+HarunoUmi&display=swap');<br>*{font-family:'Kaisei HarunoUmi'}</div>
 <label for="fontlist" class="btn-s">フォントの選択に戻る</label>
 </div>
-
-
-<style id="reset_style">
-@import url(https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DotGothic16&family=Kiwi+Maru&family=Klee+One&family=Kosugi+Maru&family=Mochiy+Pop+P+One&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&family=Potta+One&family=Rampart+One&family=Reggae+One&family=Yuji+Boku);
-@import url(https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=New+Tegomin&family=Shippori+Antique+B1&family=Stick&family=Zen+Kurenaido);
-@import url(https://fonts.googleapis.com/css2?family=Chokokutai&family=Kaisei+HarunoUmi&family=Palette+Mosaic&family=RocknRoll+One&family=Shizuru&family=Slackside+One&family=Train+One);
-/*全体*/
-:has(#reset_style){all:initial;padding:0 !important;margin:0 !important}
-:not(:has(#reset_style)):not(:has(>#reset_style) *){display:none}
-:is(h1,h2,h3,h4,h5,h6,hr){all:revert}
-:root{--color:#0ca}
-label{display:block;cursor:pointer}
-::selection{background:#aaa}
-/*ヘッダー*/
-header{display:flex;justify-content:space-around;align-items:center;height:100px;box-shadow:0 5px 5px -5px}
-header h1{margin-left:30vw}
-/*ページ*/
-[name="page"]{display:none}
-.page{display:none;max-width:600px;margin:0 auto;padding:30px;overflow:hidden}
-.page:has([name="page"]:checked){display:block}
-:has(#log:checked) [for="login"],
-:has(#log:not(:checked)) [for="logout"]{display:none}
-@media (max-width:450px){header .btn-s{display:none}}
-/*ボタン*/
-.btn{position:relative;width:280px;margin:20px auto;padding:12px 0;border-radius:10px;text-align:center;color:var(--color);font-size:18px;border:solid var(--color);transition:1s}
-.btn::before{content:'';width:0;position:absolute;inset:0;z-index:-1;border-radius:7px;background:var(--color);transition:.3s}
-.btn::after{content:'>';margin-left:10px;transition:.2s .3s}
-.btn:hover{color:#fff}
-.btn:hover::before{width:100%}
-.btn:hover::after{margin-inline:30px -20px}
-.btn-s{margin:10px;padding:10px;background:var(--color);text-align:center;border-radius:5px;color:#fff;transition:.2s}
-.btn-s:hover{filter:brightness(110%)}
-.loading{display:flex;align-items:center;justify-content:center;position:fixed;inset:0;z-index:10;animation:load 1s step-end forwards,loadback 1s}
-/*loading*/
-:has([name="page"]:active) .loading{display:none}
-.loading>*{width:100px;height:100px;aspect-ratio:0;border-radius:50%;border:solid #000;border-bottom:solid transparent;animation:loading 1s linear infinite}
-@keyframes load{to{z-index:-1;opacity:0}}
-@keyframes loadback{0%{backdrop-filter:blur(20px)}50%{backdrop-filter:blur(20px)}51%{backdrop-filter:blur(8px)}80%{backdrop-filter:blur(8px)}100%{backdrop-filter:blur(2px)}}
-@keyframes loading{to{rotate:360deg}}
-/*ボタンdisabled*/
-:has(#top:checked) [for="top"],
-:has(#logout:checked,#login:checked) [for="login"],
-:has(#logout:checked,#login:checked) [for="logout"]{pointer-events:none}
-/*トップ画面*/
-.recommend{display:grid;grid-template-columns:repeat(7,1fr);gap:10px;height:260px;position:relative;padding:20px 20px;background:#ddd;overflow-x:scroll;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none}
-.recommend label{aspect-ratio:5/7;padding:20px;border-radius:20px;background:#fff;scroll-snap-align:start;scroll-margin:20px;container-type:scroll}
-.recommend *{font-family:var(--font);font-size:40px}
-.recommend label div::after{content:var(--font);font-size:20px}
-.recommend::-webkit-scrollbar{display:none}
-.top *{text-align:center}
-.top h2{margin-top:100px;text-align:center}
-.recommend::scroll-button(*){all:unset;display:flex;width:40px;margin-inline:-20px;padding-inline:10px;margin-inline:-30px;height:300px;margin-top:-300px;align-items:center;backdrop-filter:blur(3px);background:red;font-size:30px;cursor:pointer;transition:.3s}
-.recommend::scroll-button(*):disabled{width:20px;background:#ddd;color:transparent;pointer-events:none}
-.recommend::scroll-button(left):hover{padding-inline:0px 60px}
-.recommend::scroll-button(right):hover{padding-inline:60px 0px}
-.recommend::scroll-button(left){content:'<';float:left;background:linear-gradient(90deg,var(--color),rgba(0,0,0,0))}
-.recommend::scroll-button(right){content:'>';float:right;background:linear-gradient(90deg,rgba(0,0,0,0),var(--color))}
-@keyframes left{0%{backdrop-filter:blur(3px)}90%{backdrop-filter:blur(0px)}100%{backdrop-filter:blur(100px)}}
-@keyframes right{0%{scale:1}100%{scale:2}}
-/*@container(){}*/
-/*ログイン画面*/
-.login{display:grid;max-width:300px;margin:0 auto;font-size:20px;text-align:center}
-.login input{margin:10px;padding:10px;font-size:15px;outline:none;border:solid #ddd 5px;border-radius:8px}
-.login:has(:invalid:not(:autofill)) label{pointer-events:none;background:#aaa}
-.login:not(:has(#log:checked)) .loginP{display:none}
-.login:has(#log:checked) :not(.loginP){display:none}
-/*フォント画面*/
-.fontgrid{display:grid;grid-template-columns:repeat(3,1fr);margin:10px;margin-bottom:100px;gap:20px}
-@media(max-width:600px){.fontgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:450px){.fontgrid{grid-template-columns:1fr}}
-.font{display:grid;grid-template-rows:1fr 1fr;aspect-ratio:2/3;padding:20px;border-radius:10px;box-shadow:1px 1px 2px;transition:.3s}
-.font:hover{scale:1.05}
-.font div{font-family:var(--font)}
-.font h2{margin:3px 0}
-.font h2::before{content:var(--font);font-weight:900;font-size:20px}
-.font p::before{content:'もじモジ文字';font-weight:100;font-size:14px}
-.font hr{width:100%;border:none;border-bottom:solid}
-/*購入画面*/
-.purchase{position:relative;width:100%;display:flex;justify-content:stretch;gap:20px}
-.buy-font{width:300px;--font:'存在しない商品です'}
-.buy-font{font-family:var(--font)}
-.buy-font h1::after{content:var(--font)}
-.buy-font textarea{width:90%;height:90px;padding:5%;overflow:hidden;font-size:20px;border-radius:5px;resize:none;cursor:pointer;font-family:var(--font)}
-.buy-font textarea:focus{outline:none;border-color:var(--color);transition:.3s;cursor:unset}
-.purchase-memo{flex:1;margin-top:70px;padding:20px;text-align:center;border-top:solid}
-.code{display:none;margin:40px;padding:30px 20px;background:#eee;border-radius:10px;box-shadow:1px 1px 2px;user-select:all;font-size:10px}
-.code::selection{background:var(--color);color:#fff}
-:has(#log:not(:checked)) [for="pay"]{background:#aaa;pointer-events:none}
-@media(max-width:500px){
-.purchase{display:block}
-.buy-font{width:100%;margin:0 auto}
-.buy-font h1{font-size:20px;text-align:center}
-.purchase-memo{display:flex;gap:30px;align-items:center;justify-content:center}
-}
-:has(#buy-dot:checked) .buy-font{--font:'dotGothic16'}
-:has(#buy-mochiy:checked) .buy-font{--font:'Mochiy Pop P One'}
-:has(#buy-rampart:checked) .buy-font{--font:'Rampart One'}
-:has(#buy-sans:checked) .buy-font{--font:'Noto Sans JP'}
-:has(#buy-kosugi:checked) .buy-font{--font:'Kosugi Maru'}
-:has(#buy-reggae:checked) .buy-font{--font:'Reggae One'}
-:has(#buy-klee:checked) .buy-font{--font:'Klee One'}
-:has(#buy-kiwi:checked) .buy-font{--font:'Kiwi Maru'}
-:has(#buy-potta:checked) .buy-font{--font:'Potta One'}
-:has(#buy-dela:checked) .buy-font{--font:'Dela Gothic One'}
-:has(#buy-yuji:checked) .buy-font{--font:'Yuji Boku'}
-:has(#buy-serif:checked) .buy-font{--font:'Noto Serif JP'}
-:has(#buy-tegomin:checked) .buy-font{--font:'New Tegomin'}
-:has(#buy-hachi:checked) .buy-font{--font:'Hachi Maru Pop'}
-:has(#buy-kurenaido:checked) .buy-font{--font:'Zen Kurenaido'}
-:has(#buy-shippori:checked) .buy-font{--font:'Shippori Antique B1'}
-:has(#buy-stick:checked) .buy-font{--font:'Stick'}
-:has(#buy-train:checked) .buy-font{--font:'Train One'}
-:has(#buy-rocknroll:checked) .buy-font{--font:'RocknRoll One'}
-:has(#buy-kaisei:checked) .buy-font{--font:'Kaisei HarunoUmi'}
-:has(#buy-dot:checked) .dot{display:block}
-:has(#buy-mochiy:checked) .mochiy{display:block}
-:has(#buy-rampart:checked) .rampart{display:block}
-:has(#buy-sans:checked) .sans{display:block}
-:has(#buy-kosugi:checked) .kosugi{display:block}
-:has(#buy-reggae:checked) .reggae{display:block}
-:has(#buy-klee:checked) .klee{display:block}
-:has(#buy-kiwi:checked) .kiwi{display:block}
-:has(#buy-potta:checked) .potta{display:block}
-:has(#buy-dela:checked) .dela{display:block}
-:has(#buy-yuji:checked) .yuji{display:block}
-:has(#buy-serif:checked) .serif{display:block}
-:has(#buy-tegomin:checked) .tegomin{display:block}
-:has(#buy-hachi:checked) .hachi{display:block}
-:has(#buy-kurenaido:checked) .kurenaido{display:block}
-:has(#buy-shippori:checked) .shippori{display:block}
-:has(#buy-stick:checked) .stick{display:block}
-:has(#buy-train:checked) .train{display:block}
-:has(#buy-rocknroll:checked) .rocknroll{display:block}
-:has(#buy-kaisei:checked) .kaisei{display:block}
-/*購入完了*/
-.pay,.in,.out{position:fixed;z-index:-10;bottom:5vw;left:10vw;right:10vw;padding:3vw;border-radius:2vw;background:#fff;box-shadow:2px 2px 4px;animation:pay 4s .3s;opacity:0}
-@keyframes pay{
-0%{bottom:0vw;opacity:0;z-index:10}
-20%{bottom:5vw;opacity:1;z-index:10}
-80%{bottom:5vw;opacity:1;z-index:10}
-100%{bottom:0vw;opacity:0;z-index:10}}
-:has([for="pay"]:active) .pay{display:none}
-:has(#log:active) .in{display:none}
-:has(#log:checked) .out{display:none}
-:has(#log:not(:checked)) .pay,
-:has(#log:not(:checked)) .in,
-:has(#logout:not(:checked)) .out,
-:has(#log:checked) .out{z-index:-30 !important;opacity:0 !important}
-</style>
 </body>
 </html>

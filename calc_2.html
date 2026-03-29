@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form><div id="result"><div></div></div>
+<label data-x="1"><input type="radio"></label>
+<label data-x="2"><input type="radio"></label>
+<label data-x="3"><input type="radio"></label>
+<label data-y="1"><input type="radio"></label>
+<label data-y="2"><input type="radio"></label>
+<label data-y="3"><input type="radio"></label>
+<label data-a="+"><input type="radio"></label>
+<label data-x="4"><input type="radio"></label>
+<label data-x="5"><input type="radio"></label>
+<label data-x="6"><input type="radio"></label>
+<label data-y="4"><input type="radio"></label>
+<label data-y="5"><input type="radio"></label>
+<label data-y="6"><input type="radio"></label>
+<label data-a="-"><input type="radio"></label>
+<label data-x="7"><input type="radio"></label>
+<label data-x="8"><input type="radio"></label>
+<label data-x="9"><input type="radio"></label>
+<label data-y="7"><input type="radio"></label>
+<label data-y="8"><input type="radio"></label>
+<label data-y="9"><input type="radio"></label>
+<label data-a="*"><input type="radio"></label>
+<label data-r="">AC<input type="reset"></label>
+<label data-x="0"><input type="radio"></label>
+<label data-y="0"><input type="radio"></label>
+<label data-t="="><input type="radio"></label>
+<label data-a="÷"><input type="radio"></label>
+</form>
+
+<style>
+form{display:grid;grid-template-columns:repeat(4,1fr);width:300px;font-size:30px}
+#result{grid-column:1/5;padding:5px 10px;background:#ff8;text-align:right;
+  &::before{content:var(--x)var(--a)var(--y)var(--t)'　'}
+  & div{font-size:18px;text-align:left;
+    &::before{content:'';animation:result2 .01s forwards step-end}
+    &::after{content:'';animation:result .01s forwards step-end}}}
+:has([data-t] :checked):has([data-a="+"] :checked) #result div{&::before{animation-iteration-count:calc((var(--ax) + var(--ay))*0.01)}&::after{animation-iteration-count:calc((var(--ax) + var(--ay))*0.1)}}
+:has([data-t] :checked):has([data-a="-"] :checked) #result div{&::before{animation-iteration-count:calc((var(--ax) - var(--ay))*0.01)}&::after{animation-iteration-count:calc((var(--ax) - var(--ay))*0.1)}}
+:has([data-t] :checked):has([data-a="*"] :checked) #result div{&::before{animation-iteration-count:calc((var(--ax) * var(--ay))*0.01)}&::after{animation-iteration-count:calc((var(--ax) * var(--ay))*0.1)}}
+:has([data-t] :checked):has([data-a="÷"] :checked) #result div{&::before{animation-iteration-count:calc((var(--ax) / var(--ay))*0.01)}&::after{animation-iteration-count:calc((var(--ax) / var(--ay))*0.1)}}
+label{display:none;padding:5px;text-align:center;background:#88f;border:outset 5px;
+  &:hover{background:#ccf;border:outset 3px;cursor:pointer}&:active{color:#ccf}& input{display:none}
+  &::before{content:attr(data-x)attr(data-a)attr(data-y)attr(data-t)}}
+@keyframes result{0%{content:'0'}10%{content:'1'}20%{content:'2'}30%{content:'3'}40%{content:'4'}50%{content:'5'}60%{content:'6'}70%{content:'7'}80%{content:'8'}90%{content:'9'}100%{content:'0'}}
+@keyframes result2{0%{content:''}10%{content:'1'}20%{content:'2'}30%{content:'3'}40%{content:'4'}50%{content:'5'}60%{content:'6'}70%{content:'7'}80%{content:'8'}90%{content:'9'}100%{content:''}}
+[data-a],[data-t],[data-r],
+:not(:has(:checked)) [data-x],
+:has([data-x] :checked) [data-y]{display:block}
+:not(:has(:checked)) [data-a],
+:not(:has([data-y] :checked)) [data-t],
+:not(:has([data-a] :checked)) [data-y],
+:has([data-a] :checked) [data-a],
+:has([data-y] :checked) [data-y],
+:has([data-t] :checked) [data-t]{pointer-events:none}
+:has([data-t] :checked) [data-r]{background:#8e8}
+:has([data-y] :checked) [data-t]:not(:has(:checked)){background:#e88}
+:root{--x:"";--y:"";--a:"";--t:""}
+:has([data-x="0"] :checked){--x:"0";--ax:0}
+:has([data-x="1"] :checked){--x:"1";--ax:1}
+:has([data-x="2"] :checked){--x:"2";--ax:2}
+:has([data-x="3"] :checked){--x:"3";--ax:3}
+:has([data-x="4"] :checked){--x:"4";--ax:4}
+:has([data-x="5"] :checked){--x:"5";--ax:5}
+:has([data-x="6"] :checked){--x:"6";--ax:6}
+:has([data-x="7"] :checked){--x:"7";--ax:7}
+:has([data-x="8"] :checked){--x:"8";--ax:8}
+:has([data-x="9"] :checked){--x:"9";--ax:9}
+:has([data-y="0"] :checked){--y:"0";--ay:0}
+:has([data-y="1"] :checked){--y:"1";--ay:1}
+:has([data-y="2"] :checked){--y:"2";--ay:2}
+:has([data-y="3"] :checked){--y:"3";--ay:3}
+:has([data-y="4"] :checked){--y:"4";--ay:4}
+:has([data-y="5"] :checked){--y:"5";--ay:5}
+:has([data-y="6"] :checked){--y:"6";--ay:6}
+:has([data-y="7"] :checked){--y:"7";--ay:7}
+:has([data-y="8"] :checked){--y:"8";--ay:8}
+:has([data-y="9"] :checked){--y:"9";--ay:9}
+:has([data-a="+"] :checked){--a:"＋"}
+:has([data-a="-"] :checked){--a:"ー"}
+:has([data-a="*"] :checked){--a:"×"}
+:has([data-a="÷"] :checked){--a:"÷"}
+:has([data-t] :checked){--t:"="}
+</style>
+</body>
+</html>

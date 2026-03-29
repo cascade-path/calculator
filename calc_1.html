@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form><div id="result"><div id="contain"><p></p></div></div>
+<label data-x="1"><input type="radio"></label>
+<label data-x="2"><input type="radio"></label>
+<label data-x="3"><input type="radio"></label>
+<label data-y="1"><input type="radio"></label>
+<label data-y="2"><input type="radio"></label>
+<label data-y="3"><input type="radio"></label>
+<label data-a="+"><input type="radio"></label>
+<label data-x="4"><input type="radio"></label>
+<label data-x="5"><input type="radio"></label>
+<label data-x="6"><input type="radio"></label>
+<label data-y="4"><input type="radio"></label>
+<label data-y="5"><input type="radio"></label>
+<label data-y="6"><input type="radio"></label>
+<label data-a="-"><input type="radio"></label>
+<label data-x="7"><input type="radio"></label>
+<label data-x="8"><input type="radio"></label>
+<label data-x="9"><input type="radio"></label>
+<label data-y="7"><input type="radio"></label>
+<label data-y="8"><input type="radio"></label>
+<label data-y="9"><input type="radio"></label>
+<label data-a="*"><input type="radio"></label>
+<label data-r="">R<input type="reset"></label>
+<label data-x="0"><input type="radio"></label>
+<label data-y="0"><input type="radio"></label>
+<label data-t="="><input type="radio"></label>
+<label data-a="÷"><input type="radio"></label>
+</form>
+
+<style>
+form{display:grid;grid-template-columns:repeat(4,1fr);width:300px;font-size:30px}
+#result{grid-column:1/5;padding:5px 10px;background:#ff8;text-align:right;
+  &::before{content:var(--x)var(--a)var(--y)var(--t)'　'}}
+#contain{container-type:inline-size;width:0;font-size:18px;white-space:nowrap;text-align:left}
+:has([data-t] :checked):has([data-a="+"] :checked) #contain{width:calc(var(--ax)+var(--ay))}
+:has([data-t] :checked):has([data-a="-"] :checked) #contain{width:calc(var(--ax)-var(--ay))}
+:has([data-t] :checked):has([data-a="*"] :checked) #contain{width:calc(var(--bx)*var(--ay))}
+:has([data-t] :checked):has([data-a="÷"] :checked) #contain{width:calc(var(--bx)/var(--ay))}
+label{display:none;padding:5px;text-align:center;background:#88f;border:outset 5px;
+  &:hover{background:#ccf;border:outset 3px}&:active{color:#ccf}& input{display:none}
+  &::before{content:attr(data-x)attr(data-a)attr(data-y)attr(data-t)}}
+[data-a],[data-t],[data-r],
+:not(:has(:checked)) [data-x],
+:has([data-x] :checked) [data-y]{display:block}
+:not(:has(:checked)) [data-a],
+:not(:has([data-y] :checked)) [data-t],
+:not(:has([data-a] :checked)) [data-y],
+:has([data-a] :checked) [data-a],
+:has([data-y] :checked) [data-y],
+:has([data-t] :checked) [data-t]{pointer-events:none}
+:root{--x:"";--y:"";--a:"";--t:""}
+:has([data-x="0"] :checked){--x:"0";--ax:0px;--bx:0}
+:has([data-x="1"] :checked){--x:"1";--ax:1px;--bx:1}
+:has([data-x="2"] :checked){--x:"2";--ax:2px;--bx:2}
+:has([data-x="3"] :checked){--x:"3";--ax:3px;--bx:3}
+:has([data-x="4"] :checked){--x:"4";--ax:4px;--bx:4}
+:has([data-x="5"] :checked){--x:"5";--ax:5px;--bx:5}
+:has([data-x="6"] :checked){--x:"6";--ax:6px;--bx:6}
+:has([data-x="7"] :checked){--x:"7";--ax:7px;--bx:7}
+:has([data-x="8"] :checked){--x:"8";--ax:8px;--bx:8}
+:has([data-x="9"] :checked){--x:"9";--ax:9px;--bx:9}
+:has([data-y="0"] :checked){--y:"0";--ay:0px}
+:has([data-y="1"] :checked){--y:"1";--ay:1px}
+:has([data-y="2"] :checked){--y:"2";--ay:2px}
+:has([data-y="3"] :checked){--y:"3";--ay:3px}
+:has([data-y="4"] :checked){--y:"4";--ay:4px}
+:has([data-y="5"] :checked){--y:"5";--ay:5px}
+:has([data-y="6"] :checked){--y:"6";--ay:6px}
+:has([data-y="7"] :checked){--y:"7";--ay:7px}
+:has([data-y="8"] :checked){--y:"8";--ay:8px}
+:has([data-y="9"] :checked){--y:"9";--ay:9px}
+:has([data-a="+"] :checked){--a:"＋"}
+:has([data-a="-"] :checked){--a:"ー"}
+:has([data-a="*"] :checked){--a:"×"}
+:has([data-a="÷"] :checked){--y:"÷"}
+:has([data-t] :checked){--t:"="}
+html:not(:has([data-t] :checked)) #contain p::before{content:''}
+@container(min-width:0px){#contain p::before{content:'0'}}
+@container(min-width:1px){#contain p::before{content:'1'}}
+@container(min-width:2px){#contain p::before{content:'2'}}
+@container(min-width:3px){#contain p::before{content:'3'}}
+@container(min-width:4px){#contain p::before{content:'四'}}
+@container(min-width:5px){#contain p::before{content:'Five.'}}
+@container(min-width:6px){#contain p::before{content:'最小完全数'}}
+@container(min-width:7px){#contain p::before{content:'7'}}
+@container(min-width:8px){#contain p::before{content:'8'}}
+@container(min-width:9px){#contain p::before{content:'9より大きい数'}}
+@container(min-width:10px){#contain p::before{content:'10より大きい数'}}
+@container(min-width:12px){#contain p::before{content:'12より大きい数'}}
+@container(min-width:15px){#contain p::before{content:'15より大きい数'}}
+@container(min-width:18px){#contain p::before{content:'18より大きい数'}}
+@container(min-width:20px){#contain p::before{content:'20より大きい数'}}
+@container(min-width:24px){#contain p::before{content:'24'}}
+@container(min-width:25px){#contain p::before{content:'25か27か28'}}
+@container(min-width:30px){#contain p::before{content:'30より大きい数'}}
+@container(min-width:32px){#contain p::before{content:'32より大きい数'}}
+@container(min-width:36px){#contain p::before{content:'36'}}
+@container(min-width:40px){#contain p::before{content:'40'}}
+@container(min-width:45px){#contain p::before{content:'45'}}
+@container(min-width:48px){#contain p::before{content:'48億'}}
+@container(min-width:49px){#contain p::before{content:'48.99999999999999'}}
+@container(min-width:56px){#contain p::before{content:'56'}}
+@container(min-width:64px){#contain p::before{content:'約64兆'}}
+@container(min-width:72px){#contain p::before{content:'72'}}
+@container(min-width:81px){#contain p::before{content:'80より大きくて82より小さい数'}}
+@container(min-width:82px){#contain p::before{content:'Error**'}}
+</style>
+</body>
+</html>

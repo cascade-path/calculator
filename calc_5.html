@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+:has([data-p]:checked){filter: hue-rotate(180deg);}
+@scope(:has(>.CALC)){
+/* UI */
+.CALC{width:300px;background:#ccc;padding:10px;border-radius:10px;color:#ddd}
+.result{height:50px;padding:10px;background:#484;color:#fff;border:solid #444 20px;border-top-width:50px;border-radius:10px}
+form{display:grid;grid-template-columns:repeat(4,1fr);gap:5px 8px;height:240px;margin:10px}
+input{all:unset;display:none;align-items:center;justify-content:center;text-align:center;cursor:pointer;font-size:20px;background:#666;border-radius:5px;&::before{content:attr(data-x0)attr(data-x1)attr(data-x2)attr(data-x3)attr(data-x4)attr(data-x5)attr(data-x6)attr(data-x7)attr(data-x8)attr(data-y0)attr(data-y1)attr(data-y2)attr(data-y3)attr(data-y4)attr(data-y5)attr(data-y6)attr(data-y7)attr(data-y8)attr(data-c)attr(data-t)attr(data-xs)attr(data-ys)attr(data-p);display:block}&:is([name="px"],[name="py"])::before{content:'.'}}
+input:hover{background:#777}
+/*入力*/
+[data-c]:not([data-d]),[type="reset"],[data-t]:not([data-d]),[data-p],
+:not(:has([data-x0]:not([data-d]):checked)) :is([data-x0],[data-px0]),
+:not(:has([data-c]:checked)) [data-xs],
+:has([data-c]:checked) [data-ys],
+:has([data-x0]:not([data-d]):checked):not(:has([data-x1]:not([data-d]):checked,[data-c]:not([data-d]):checked)) :is([data-x1]:not([data-d]),[data-x0][data-d],[data-px1]),
+:has([data-x1]:not([data-d]):checked):not(:has([data-x2]:not([data-d]):checked,[data-c]:not([data-d]):checked)) :is([data-x2]:not([data-d]),[data-x1][data-d],[data-px2]),
+:has([data-x2]:not([data-d]):checked):not(:has([data-x3]:not([data-d]):checked,[data-c]:not([data-d]):checked)) :is([data-x3]:not([data-d]),[data-x2][data-d],[data-px3]),
+:has([data-x3]:not([data-d]):checked):not(:has([data-x4]:not([data-d]):checked,[data-c]:not([data-d]):checked)) :is([data-x4]:not([data-d]),[data-x3][data-d],[data-px4]),
+:has([data-x4]:not([data-d]):checked):not(:has([data-x5]:not([data-d]):checked,[data-c]:not([data-d]):checked)) :is([data-x5]:not([data-d]),[data-x4][data-d],[data-px5]),
+:has([data-x5]:not([data-d]):checked):not(:has([data-x6]:not([data-d]):checked,[data-c]:not([data-d]):checked)) :is([data-x6]:not([data-d]),[data-x5][data-d],[data-px6]),
+:has([data-x6]:not([data-d]):checked):not(:has([data-x7]:not([data-d]):checked,[data-c]:not([data-d]):checked)) :is([data-x7]:not([data-d]),[data-x6][data-d],[data-px7]),
+:has([data-x7]:not([data-d]):checked):not(:has([data-x8]:not([data-d]):checked,[data-c]:not([data-d]):checked)) :is([data-x8]:not([data-d]),[data-x7][data-d],[data-px8]),
+:has([data-c]:not([data-d]):checked):not(:has([data-y0]:not([data-d]):checked)) :is([data-y0]:not([data-d]),[data-c][data-d],[data-py0]),
+:has([data-y0]:not([data-d]):checked):not(:has([data-y1]:not([data-d]):checked)) :is([data-y1]:not([data-d]),[data-y0][data-d],[data-py1]),
+:has([data-y1]:not([data-d]):checked):not(:has([data-y2]:not([data-d]):checked)) :is([data-y2]:not([data-d]),[data-y1][data-d],[data-py2]),
+:has([data-y2]:not([data-d]):checked):not(:has([data-y3]:not([data-d]):checked)) :is([data-y3]:not([data-d]),[data-y2][data-d],[data-py3]),
+:has([data-y3]:not([data-d]):checked):not(:has([data-y4]:not([data-d]):checked)) :is([data-y4]:not([data-d]),[data-y3][data-d],[data-py4]),
+:has([data-y4]:not([data-d]):checked):not(:has([data-y5]:not([data-d]):checked)) :is([data-y5]:not([data-d]),[data-y4][data-d],[data-py5]),
+:has([data-y5]:not([data-d]):checked):not(:has([data-y6]:not([data-d]):checked)) :is([data-y6]:not([data-d]),[data-y5][data-d],[data-py6]),
+:has([data-y6]:not([data-d]):checked):not(:has([data-y7]:not([data-d]):checked)) :is([data-y7]:not([data-d]),[data-y6][data-d],[data-py7]),
+:has([data-y7]:not([data-d]):checked):not(:has([data-y8]:not([data-d]):checked)) :is([data-y8]:not([data-d]),[data-y7][data-d],[data-py8]){display:flex}
+[data-x8],[data-y8],[data-px0],[data-py0],[data-px8],[data-py8],
+:has([data-x0="0"]:checked):has([data-px1]:not(:checked)) [data-x1],
+:has([data-y0="0"]:checked):has([data-py1]:not(:checked)) [data-y1],
+:not(:has([data-x0]:not([data-d]):checked)) :is([data-c],[type="reset"],[data-xs],[data-d]),
+:has([data-c]:not([data-d]):checked) [data-c]:not([data-d]),
+:not(:has([data-y0]:not([data-d]):checked)) :is([data-t],[data-ys]),
+:has([data-t]:checked) input:not([type="reset"]){pointer-events:none;background:#aaa}
+/*出力*/
+:not(:has([data-t]:checked)) .result span{display:none}
+.result::before{content:var(--axs)var(--ax0)var(--px1)var(--ax1)var(--px2)var(--ax2)var(--px3)var(--ax3)var(--px4)var(--ax4)var(--px5)var(--ax5)var(--px6)var(--ax6)var(--px7)var(--ax7)var(--ax8)' 'var(--c)' 'var(--ays)var(--ay0)var(--py1)var(--ay1)var(--py2)var(--ay2)var(--py3)var(--ay3)var(--py4)var(--ay4)var(--py5)var(--ay5)var(--py6)var(--ay6)var(--py7)var(--ay7)var(--ay8)var(--bys)' 'var(--t)'　';color:#ddd}
+:has([data-c="+"]:checked) .result span::after{content:'';animation:result 0s calc((max(calc(var(--X) + var(--Y)),calc((var(--X) + var(--Y)) * -1)) + 0.0000000001)* var(--digit)) step-end forwards}
+:has([data-c="-"]:checked) .result span::after{content:'';animation:result 0s calc((max(calc(var(--X) - var(--Y)),calc((var(--X) - var(--Y)) * -1)) + 0.0000000001)* var(--digit)) step-end forwards}
+:has([data-c="×"]:checked) .result span::after{content:'';animation:result 0s calc((var(--X) * var(--Y) + 0.0000000001)* var(--digit)) step-end forwards}
+:has([data-c="÷"]:checked) .result span::after{content:'';animation:result 0s calc((var(--X) / var(--Y) + 0.0000000001)* var(--digit)) step-end forwards}
+:has([data-c]:checked) .result span:nth-child(2)::after{animation-name:result1}
+:has([data-c]:checked) .result span:last-child::after{animation-name:result2}
+@keyframes result{0%{content:''}0.0015%{content:'0'}10%{content:'1'}20%{content:'2'}30%{content:'3'}40%{content:'4'}50%{content:'5'}60%{content:'6'}70%{content:'7'}80%{content:'8'}90%{content:'9'}100%{content:''}}
+@keyframes result1{0%{content:''}0.00015%{content:'.'}100%{content:''}}
+@keyframes result2{0%{content:''}0.015%{content:' ...'}100%{content:''}}
+:has([data-c="+"]:checked):has([data-t]:checked) .result span:first-child::before{content:counter(a);counter-reset:a calc(var(--X) + var(--Y) - abs(var(--X) + var(--Y)) / (var(--X) + var(--Y)) / 2)}
+:has([data-c="-"]:checked):has([data-t]:checked) .result span:first-child::before{content:counter(a);counter-reset:a calc(var(--X) - var(--Y) - abs(var(--X) - var(--Y)) / (var(--X) - var(--Y)) / 2)}
+:has([data-c="×"]:checked):has([data-t]:checked) .result span:first-child::before{content:counter(a);counter-reset:a calc(var(--X) * var(--Y) - .5)}
+:has([data-c="÷"]:checked):has([data-t]:checked) .result span:first-child::before{content:counter(a);counter-reset:a calc(var(--X) / var(--Y) - .5)}
+:has([data-c="÷"]:checked):has([data-t]:checked):has([data-y0="0"]:checked) .result span:first-child::before{content:'**ERROR**'}
+/*演算*/
+.CALC{--X:calc((var(--x0)* 10000000 + var(--x1)* 1000000 + var(--x2)* 100000 + var(--x3)* 10000 + var(--x4)* 1000 + var(--x5)* 100 + var(--x6)* 10 + var(--x7)* 1)* var(--dx) * var(--xs));--Y:calc((var(--y0)* 10000000 + var(--y1)* 1000000 + var(--y2)* 100000 + var(--y3)* 10000 + var(--y4)* 1000 + var(--y5)* 100 + var(--y6)* 10 + var(--y7)* 1) * var(--dy) * var(--ys))}
+.CALC{--x0:0;--x1:0;--x2:0;--x3:0;--x4:0;--x5:0;--x6:0;--x7:0;--x8:0;--y0:0;--y1:0;--y2:0;--y3:0;--y4:0;--y5:0;--y6:0;--y7:0;--y8:0;--xs:1;--ys:1;--ax0:"";--ax1:"";--ax2:"";--ax3:"";--ax4:"";--ax5:"";--ax6:"";--ax7:"";--ax8:"";--ay0:"";--ay1:"";--ay2:"";--ay3:"";--ay4:"";--ay5:"";--ay6:"";--ay7:"";--ay8:"";--dx:0;--dy:0;--c:"";--t:"";--axs:"";--ays:"";--bys:"";--px1:"";--px2:"";--px3:"";--px4:"";--px5:"";--px6:"";--px7:"";--py1:"";--py2:"";--py3:"";--py4:"";--py5:"";--py6:"";--py7:""}
+:has([data-x0="0"]:checked){--x0:0;--ax0:"0"}
+:has([data-x0="1"]:checked){--x0:1;--ax0:"1"}
+:has([data-x0="2"]:checked){--x0:2;--ax0:"2"}
+:has([data-x0="3"]:checked){--x0:3;--ax0:"3"}
+:has([data-x0="4"]:checked){--x0:4;--ax0:"4"}
+:has([data-x0="5"]:checked){--x0:5;--ax0:"5"}
+:has([data-x0="6"]:checked){--x0:6;--ax0:"6"}
+:has([data-x0="7"]:checked){--x0:7;--ax0:"7"}
+:has([data-x0="8"]:checked){--x0:8;--ax0:"8"}
+:has([data-x0="9"]:checked){--x0:9;--ax0:"9"}
+:has([data-x1="0"]:checked){--x1:0;--ax1:"0"}
+:has([data-x1="1"]:checked){--x1:1;--ax1:"1"}
+:has([data-x1="2"]:checked){--x1:2;--ax1:"2"}
+:has([data-x1="3"]:checked){--x1:3;--ax1:"3"}
+:has([data-x1="4"]:checked){--x1:4;--ax1:"4"}
+:has([data-x1="5"]:checked){--x1:5;--ax1:"5"}
+:has([data-x1="6"]:checked){--x1:6;--ax1:"6"}
+:has([data-x1="7"]:checked){--x1:7;--ax1:"7"}
+:has([data-x1="8"]:checked){--x1:8;--ax1:"8"}
+:has([data-x1="9"]:checked){--x1:9;--ax1:"9"}
+:has([data-x2="0"]:checked){--x2:0;--ax2:"0"}
+:has([data-x2="1"]:checked){--x2:1;--ax2:"1"}
+:has([data-x2="2"]:checked){--x2:2;--ax2:"2"}
+:has([data-x2="3"]:checked){--x2:3;--ax2:"3"}
+:has([data-x2="4"]:checked){--x2:4;--ax2:"4"}
+:has([data-x2="5"]:checked){--x2:5;--ax2:"5"}
+:has([data-x2="6"]:checked){--x2:6;--ax2:"6"}
+:has([data-x2="7"]:checked){--x2:7;--ax2:"7"}
+:has([data-x2="8"]:checked){--x2:8;--ax2:"8"}
+:has([data-x2="9"]:checked){--x2:9;--ax2:"9"}
+:has([data-x3="0"]:checked){--x3:0;--ax3:"0"}
+:has([data-x3="1"]:checked){--x3:1;--ax3:"1"}
+:has([data-x3="2"]:checked){--x3:2;--ax3:"2"}
+:has([data-x3="3"]:checked){--x3:3;--ax3:"3"}
+:has([data-x3="4"]:checked){--x3:4;--ax3:"4"}
+:has([data-x3="5"]:checked){--x3:5;--ax3:"5"}
+:has([data-x3="6"]:checked){--x3:6;--ax3:"6"}
+:has([data-x3="7"]:checked){--x3:7;--ax3:"7"}
+:has([data-x3="8"]:checked){--x3:8;--ax3:"8"}
+:has([data-x3="9"]:checked){--x3:9;--ax3:"9"}
+:has([data-x4="0"]:checked){--x4:0;--ax4:"0"}
+:has([data-x4="1"]:checked){--x4:1;--ax4:"1"}
+:has([data-x4="2"]:checked){--x4:2;--ax4:"2"}
+:has([data-x4="3"]:checked){--x4:3;--ax4:"3"}
+:has([data-x4="4"]:checked){--x4:4;--ax4:"4"}
+:has([data-x4="5"]:checked){--x4:5;--ax4:"5"}
+:has([data-x4="6"]:checked){--x4:6;--ax4:"6"}
+:has([data-x4="7"]:checked){--x4:7;--ax4:"7"}
+:has([data-x4="8"]:checked){--x4:8;--ax4:"8"}
+:has([data-x4="9"]:checked){--x4:9;--ax4:"9"}
+:has([data-x5="0"]:checked){--x5:0;--ax5:"0"}
+:has([data-x5="1"]:checked){--x5:1;--ax5:"1"}
+:has([data-x5="2"]:checked){--x5:2;--ax5:"2"}
+:has([data-x5="3"]:checked){--x5:3;--ax5:"3"}
+:has([data-x5="4"]:checked){--x5:4;--ax5:"4"}
+:has([data-x5="5"]:checked){--x5:5;--ax5:"5"}
+:has([data-x5="6"]:checked){--x5:6;--ax5:"6"}
+:has([data-x5="7"]:checked){--x5:7;--ax5:"7"}
+:has([data-x5="8"]:checked){--x5:8;--ax5:"8"}
+:has([data-x5="9"]:checked){--x5:9;--ax5:"9"}
+:has([data-x6="0"]:checked){--x6:0;--ax6:"0"}
+:has([data-x6="1"]:checked){--x6:1;--ax6:"1"}
+:has([data-x6="2"]:checked){--x6:2;--ax6:"2"}
+:has([data-x6="3"]:checked){--x6:3;--ax6:"3"}
+:has([data-x6="4"]:checked){--x6:4;--ax6:"4"}
+:has([data-x6="5"]:checked){--x6:5;--ax6:"5"}
+:has([data-x6="6"]:checked){--x6:6;--ax6:"6"}
+:has([data-x6="7"]:checked){--x6:7;--ax6:"7"}
+:has([data-x6="8"]:checked){--x6:8;--ax6:"8"}
+:has([data-x6="9"]:checked){--x6:9;--ax6:"9"}
+:has([data-x7="0"]:checked){--x7:0;--ax7:"0"}
+:has([data-x7="1"]:checked){--x7:1;--ax7:"1"}
+:has([data-x7="2"]:checked){--x7:2;--ax7:"2"}
+:has([data-x7="3"]:checked){--x7:3;--ax7:"3"}
+:has([data-x7="4"]:checked){--x7:4;--ax7:"4"}
+:has([data-x7="5"]:checked){--x7:5;--ax7:"5"}
+:has([data-x7="6"]:checked){--x7:6;--ax7:"6"}
+:has([data-x7="7"]:checked){--x7:7;--ax7:"7"}
+:has([data-x7="8"]:checked){--x7:8;--ax7:"8"}
+:has([data-x7="9"]:checked){--x7:9;--ax7:"9"}
+:has([data-x8="0"]:checked){--x8:0;--ax8:"0"}
+:has([data-x8="1"]:checked){--x8:1;--ax8:"1"}
+:has([data-x8="2"]:checked){--x8:2;--ax8:"2"}
+:has([data-x8="3"]:checked){--x8:3;--ax8:"3"}
+:has([data-x8="4"]:checked){--x8:4;--ax8:"4"}
+:has([data-x8="5"]:checked){--x8:5;--ax8:"5"}
+:has([data-x8="6"]:checked){--x8:6;--ax8:"6"}
+:has([data-x8="7"]:checked){--x8:7;--ax8:"7"}
+:has([data-x8="8"]:checked){--x8:8;--ax8:"8"}
+:has([data-x8="9"]:checked){--x8:9;--ax8:"9"}
+:has([data-y0="0"]:checked){--y0:0;--ay0:"0"}
+:has([data-y0="1"]:checked){--y0:1;--ay0:"1"}
+:has([data-y0="2"]:checked){--y0:2;--ay0:"2"}
+:has([data-y0="3"]:checked){--y0:3;--ay0:"3"}
+:has([data-y0="4"]:checked){--y0:4;--ay0:"4"}
+:has([data-y0="5"]:checked){--y0:5;--ay0:"5"}
+:has([data-y0="6"]:checked){--y0:6;--ay0:"6"}
+:has([data-y0="7"]:checked){--y0:7;--ay0:"7"}
+:has([data-y0="8"]:checked){--y0:8;--ay0:"8"}
+:has([data-y0="9"]:checked){--y0:9;--ay0:"9"}
+:has([data-y1="0"]:checked){--y1:0;--ay1:"0"}
+:has([data-y1="1"]:checked){--y1:1;--ay1:"1"}
+:has([data-y1="2"]:checked){--y1:2;--ay1:"2"}
+:has([data-y1="3"]:checked){--y1:3;--ay1:"3"}
+:has([data-y1="4"]:checked){--y1:4;--ay1:"4"}
+:has([data-y1="5"]:checked){--y1:5;--ay1:"5"}
+:has([data-y1="6"]:checked){--y1:6;--ay1:"6"}
+:has([data-y1="7"]:checked){--y1:7;--ay1:"7"}
+:has([data-y1="8"]:checked){--y1:8;--ay1:"8"}
+:has([data-y1="9"]:checked){--y1:9;--ay1:"9"}
+:has([data-y2="0"]:checked){--y2:0;--ay2:"0"}
+:has([data-y2="1"]:checked){--y2:1;--ay2:"1"}
+:has([data-y2="2"]:checked){--y2:2;--ay2:"2"}
+:has([data-y2="3"]:checked){--y2:3;--ay2:"3"}
+:has([data-y2="4"]:checked){--y2:4;--ay2:"4"}
+:has([data-y2="5"]:checked){--y2:5;--ay2:"5"}
+:has([data-y2="6"]:checked){--y2:6;--ay2:"6"}
+:has([data-y2="7"]:checked){--y2:7;--ay2:"7"}
+:has([data-y2="8"]:checked){--y2:8;--ay2:"8"}
+:has([data-y2="9"]:checked){--y2:9;--ay2:"9"}
+:has([data-y3="0"]:checked){--y3:0;--ay3:"0"}
+:has([data-y3="1"]:checked){--y3:1;--ay3:"1"}
+:has([data-y3="2"]:checked){--y3:2;--ay3:"2"}
+:has([data-y3="3"]:checked){--y3:3;--ay3:"3"}
+:has([data-y3="4"]:checked){--y3:4;--ay3:"4"}
+:has([data-y3="5"]:checked){--y3:5;--ay3:"5"}
+:has([data-y3="6"]:checked){--y3:6;--ay3:"6"}
+:has([data-y3="7"]:checked){--y3:7;--ay3:"7"}
+:has([data-y3="8"]:checked){--y3:8;--ay3:"8"}
+:has([data-y3="9"]:checked){--y3:9;--ay3:"9"}
+:has([data-y4="0"]:checked){--y4:0;--ay4:"0"}
+:has([data-y4="1"]:checked){--y4:1;--ay4:"1"}
+:has([data-y4="2"]:checked){--y4:2;--ay4:"2"}
+:has([data-y4="3"]:checked){--y4:3;--ay4:"3"}
+:has([data-y4="4"]:checked){--y4:4;--ay4:"4"}
+:has([data-y4="5"]:checked){--y4:5;--ay4:"5"}
+:has([data-y4="6"]:checked){--y4:6;--ay4:"6"}
+:has([data-y4="7"]:checked){--y4:7;--ay4:"7"}
+:has([data-y4="8"]:checked){--y4:8;--ay4:"8"}
+:has([data-y4="9"]:checked){--y4:9;--ay4:"9"}
+:has([data-y5="0"]:checked){--y5:0;--ay5:"0"}
+:has([data-y5="1"]:checked){--y5:1;--ay5:"1"}
+:has([data-y5="2"]:checked){--y5:2;--ay5:"2"}
+:has([data-y5="3"]:checked){--y5:3;--ay5:"3"}
+:has([data-y5="4"]:checked){--y5:4;--ay5:"4"}
+:has([data-y5="5"]:checked){--y5:5;--ay5:"5"}
+:has([data-y5="6"]:checked){--y5:6;--ay5:"6"}
+:has([data-y5="7"]:checked){--y5:7;--ay5:"7"}
+:has([data-y5="8"]:checked){--y5:8;--ay5:"8"}
+:has([data-y5="9"]:checked){--y5:9;--ay5:"9"}
+:has([data-y6="0"]:checked){--y6:0;--ay6:"0"}
+:has([data-y6="1"]:checked){--y6:1;--ay6:"1"}
+:has([data-y6="2"]:checked){--y6:2;--ay6:"2"}
+:has([data-y6="3"]:checked){--y6:3;--ay6:"3"}
+:has([data-y6="4"]:checked){--y6:4;--ay6:"4"}
+:has([data-y6="5"]:checked){--y6:5;--ay6:"5"}
+:has([data-y6="6"]:checked){--y6:6;--ay6:"6"}
+:has([data-y6="7"]:checked){--y6:7;--ay6:"7"}
+:has([data-y6="8"]:checked){--y6:8;--ay6:"8"}
+:has([data-y6="9"]:checked){--y6:9;--ay6:"9"}
+:has([data-y7="0"]:checked){--y7:0;--ay7:"0"}
+:has([data-y7="1"]:checked){--y7:1;--ay7:"1"}
+:has([data-y7="2"]:checked){--y7:2;--ay7:"2"}
+:has([data-y7="3"]:checked){--y7:3;--ay7:"3"}
+:has([data-y7="4"]:checked){--y7:4;--ay7:"4"}
+:has([data-y7="5"]:checked){--y7:5;--ay7:"5"}
+:has([data-y7="6"]:checked){--y7:6;--ay7:"6"}
+:has([data-y7="7"]:checked){--y7:7;--ay7:"7"}
+:has([data-y7="8"]:checked){--y7:8;--ay7:"8"}
+:has([data-y7="9"]:checked){--y7:9;--ay7:"9"}
+:has([data-y8="0"]:checked){--y8:0;--ay8:"0"}
+:has([data-y8="1"]:checked){--y8:1;--ay8:"1"}
+:has([data-y8="2"]:checked){--y8:2;--ay8:"2"}
+:has([data-y8="3"]:checked){--y8:3;--ay8:"3"}
+:has([data-y8="4"]:checked){--y8:4;--ay8:"4"}
+:has([data-y8="5"]:checked){--y8:5;--ay8:"5"}
+:has([data-y8="6"]:checked){--y8:6;--ay8:"6"}
+:has([data-y8="7"]:checked){--y8:7;--ay8:"7"}
+:has([data-y8="8"]:checked){--y8:8;--ay8:"8"}
+:has([data-y8="9"]:checked){--y8:9;--ay8:"9"}
+:has([data-xs]:checked){--xs:-1;--axs:"-"}
+:has([data-ys]:checked){--ys:-1;--ays:"( -";--bys:" )"}
+:has([data-c="+"]:checked){--c:"+"}
+:has([data-c="-"]:checked){--c:"-"}
+:has([data-c="×"]:checked){--c:"×"}
+:has([data-c="÷"]:checked){--c:"÷"}
+:has([data-t]:checked){--t:"="}
+:has([name="x0"]:not([data-d]):checked){--dx:0.0000001}
+:has([name="x1"]:not([data-d]):checked){--dx:0.000001}
+:has([name="x2"]:not([data-d]):checked){--dx:0.00001}
+:has([name="x3"]:not([data-d]):checked){--dx:0.0001}
+:has([name="x4"]:not([data-d]):checked){--dx:0.001}
+:has([name="x5"]:not([data-d]):checked){--dx:0.01}
+:has([name="x6"]:not([data-d]):checked){--dx:0.1}
+:has([name="x7"]:not([data-d]):checked){--dx:1}
+:has([name="x8"]:not([data-d]):checked){--dx:10}
+:has([name="y0"]:not([data-d]):checked){--dy:0.0000001}
+:has([name="y1"]:not([data-d]):checked){--dy:0.000001}
+:has([name="y2"]:not([data-d]):checked){--dy:0.00001}
+:has([name="y3"]:not([data-d]):checked){--dy:0.0001}
+:has([name="y4"]:not([data-d]):checked){--dy:0.001}
+:has([name="y5"]:not([data-d]):checked){--dy:0.01}
+:has([name="y6"]:not([data-d]):checked){--dy:0.1}
+:has([name="y7"]:not([data-d]):checked){--dy:1}
+:has([name="y8"]:not([data-d]):checked){--dy:10}
+:has([data-px1]:checked):has([data-x1]:not([data-d]):checked){--dx:0.0000001;--px1:'.'}
+:has([data-px2]:checked):has([data-x2]:not([data-d]):checked){--dx:0.000001;--px2:'.'}
+:has([data-px3]:checked):has([data-x3]:not([data-d]):checked){--dx:0.00001;--px3:'.'}
+:has([data-px4]:checked):has([data-x4]:not([data-d]):checked){--dx:0.0001;--px4:'.'}
+:has([data-px5]:checked):has([data-x5]:not([data-d]):checked){--dx:0.001;--px5:'.'}
+:has([data-px6]:checked):has([data-x6]:not([data-d]):checked){--dx:0.01;--px6:'.'}
+:has([data-px7]:checked):has([data-x7]:not([data-d]):checked){--dx:0.1;--px7:'.'}
+:has([data-py1]:checked):has([data-y1]:not([data-d]):checked){--dy:0.0000001;--py1:'.'}
+:has([data-py2]:checked):has([data-y2]:not([data-d]):checked){--dy:0.000001;--py2:'.'}
+:has([data-py3]:checked):has([data-y3]:not([data-d]):checked){--dy:0.00001;--py3:'.'}
+:has([data-py4]:checked):has([data-y4]:not([data-d]):checked){--dy:0.0001;--py4:'.'}
+:has([data-py5]:checked):has([data-y5]:not([data-d]):checked){--dy:0.001;--py5:'.'}
+:has([data-py6]:checked):has([data-y6]:not([data-d]):checked){--dy:0.01;--py6:'.'}
+:has([data-py7]:checked):has([data-y7]:not([data-d]):checked){--dy:0.1;--py7:'.'}
+}
+</style>
+<div class="CALC">
+<div class="result"><span></span><span style="--digit:1"></span><span style="--digit:1"></span><span style="--digit:10"></span><span style="--digit:100"></span><span style="--digit:1000"></span><span style="--digit:10000"></span><span style="--digit:100000"></span><span style="--digit:1000000"></span></div><form>
+<input value="AC" type="reset">
+<input data-p="?" type="checkbox">
+<input data-xs="+/-" type="checkbox">
+<input data-ys="+/-" type="checkbox">
+<input data-x0="⌫" type="radio" name="x0" data-d="">
+<input data-x1="⌫" type="radio" name="x1" data-d="">
+<input data-x2="⌫" type="radio" name="x2" data-d="">
+<input data-x3="⌫" type="radio" name="x3" data-d="">
+<input data-x4="⌫" type="radio" name="x4" data-d="">
+<input data-x5="⌫" type="radio" name="x5" data-d="">
+<input data-x6="⌫" type="radio" name="x6" data-d="">
+<input data-x7="⌫" type="radio" name="x7" data-d="">
+<input data-x8="⌫" type="radio" name="x8" data-d="">
+<input data-x9="⌫" type="radio" name="x9" data-d="">
+<input data-c="⌫" type="radio" name="c" data-d="">
+<input data-y0="⌫" type="radio" name="y0" data-d="">
+<input data-y1="⌫" type="radio" name="y1" data-d="">
+<input data-y2="⌫" type="radio" name="y2" data-d="">
+<input data-y3="⌫" type="radio" name="y3" data-d="">
+<input data-y4="⌫" type="radio" name="y4" data-d="">
+<input data-y5="⌫" type="radio" name="y5" data-d="">
+<input data-y6="⌫" type="radio" name="y6" data-d="">
+<input data-y7="⌫" type="radio" name="y7" data-d="">
+<input data-y8="⌫" type="radio" name="y8" data-d="">
+<input data-y9="⌫" type="radio" name="y9" data-d="">
+<input data-x0="7" type="radio" name="x0">
+<input data-x1="7" type="radio" name="x1">
+<input data-x2="7" type="radio" name="x2">
+<input data-x3="7" type="radio" name="x3">
+<input data-x4="7" type="radio" name="x4">
+<input data-x5="7" type="radio" name="x5">
+<input data-x6="7" type="radio" name="x6">
+<input data-x7="7" type="radio" name="x7">
+<input data-x8="7" type="radio" name="x8">
+<input data-y0="7" type="radio" name="y0">
+<input data-y1="7" type="radio" name="y1">
+<input data-y2="7" type="radio" name="y2">
+<input data-y3="7" type="radio" name="y3">
+<input data-y4="7" type="radio" name="y4">
+<input data-y5="7" type="radio" name="y5">
+<input data-y6="7" type="radio" name="y6">
+<input data-y7="7" type="radio" name="y7">
+<input data-y8="7" type="radio" name="y8">
+<input data-x0="8" type="radio" name="x0">
+<input data-x1="8" type="radio" name="x1">
+<input data-x2="8" type="radio" name="x2">
+<input data-x3="8" type="radio" name="x3">
+<input data-x4="8" type="radio" name="x4">
+<input data-x5="8" type="radio" name="x5">
+<input data-x6="8" type="radio" name="x6">
+<input data-x7="8" type="radio" name="x7">
+<input data-x8="8" type="radio" name="x8">
+<input data-y0="8" type="radio" name="y0">
+<input data-y1="8" type="radio" name="y1">
+<input data-y2="8" type="radio" name="y2">
+<input data-y3="8" type="radio" name="y3">
+<input data-y4="8" type="radio" name="y4">
+<input data-y5="8" type="radio" name="y5">
+<input data-y6="8" type="radio" name="y6">
+<input data-y7="8" type="radio" name="y7">
+<input data-y8="8" type="radio" name="y8">
+<input data-x0="9" type="radio" name="x0">
+<input data-x1="9" type="radio" name="x1">
+<input data-x2="9" type="radio" name="x2">
+<input data-x3="9" type="radio" name="x3">
+<input data-x4="9" type="radio" name="x4">
+<input data-x5="9" type="radio" name="x5">
+<input data-x6="9" type="radio" name="x6">
+<input data-x7="9" type="radio" name="x7">
+<input data-x8="9" type="radio" name="x8">
+<input data-y0="9" type="radio" name="y0">
+<input data-y1="9" type="radio" name="y1">
+<input data-y2="9" type="radio" name="y2">
+<input data-y3="9" type="radio" name="y3">
+<input data-y4="9" type="radio" name="y4">
+<input data-y5="9" type="radio" name="y5">
+<input data-y6="9" type="radio" name="y6">
+<input data-y7="9" type="radio" name="y7">
+<input data-y8="9" type="radio" name="y8">
+<input data-c="÷" type="radio" name="c">
+<input data-x0="4" type="radio" name="x0">
+<input data-x1="4" type="radio" name="x1">
+<input data-x2="4" type="radio" name="x2">
+<input data-x3="4" type="radio" name="x3">
+<input data-x4="4" type="radio" name="x4">
+<input data-x5="4" type="radio" name="x5">
+<input data-x6="4" type="radio" name="x6">
+<input data-x7="4" type="radio" name="x7">
+<input data-x8="4" type="radio" name="x8">
+<input data-y0="4" type="radio" name="y0">
+<input data-y1="4" type="radio" name="y1">
+<input data-y2="4" type="radio" name="y2">
+<input data-y3="4" type="radio" name="y3">
+<input data-y4="4" type="radio" name="y4">
+<input data-y5="4" type="radio" name="y5">
+<input data-y6="4" type="radio" name="y6">
+<input data-y7="4" type="radio" name="y7">
+<input data-y8="4" type="radio" name="y8">
+<input data-x0="5" type="radio" name="x0">
+<input data-x1="5" type="radio" name="x1">
+<input data-x2="5" type="radio" name="x2">
+<input data-x3="5" type="radio" name="x3">
+<input data-x4="5" type="radio" name="x4">
+<input data-x5="5" type="radio" name="x5">
+<input data-x6="5" type="radio" name="x6">
+<input data-x7="5" type="radio" name="x7">
+<input data-x8="5" type="radio" name="x8">
+<input data-y0="5" type="radio" name="y0">
+<input data-y1="5" type="radio" name="y1">
+<input data-y2="5" type="radio" name="y2">
+<input data-y3="5" type="radio" name="y3">
+<input data-y4="5" type="radio" name="y4">
+<input data-y5="5" type="radio" name="y5">
+<input data-y6="5" type="radio" name="y6">
+<input data-y7="5" type="radio" name="y7">
+<input data-y8="5" type="radio" name="y8">
+<input data-x0="6" type="radio" name="x0">
+<input data-x1="6" type="radio" name="x1">
+<input data-x2="6" type="radio" name="x2">
+<input data-x3="6" type="radio" name="x3">
+<input data-x4="6" type="radio" name="x4">
+<input data-x5="6" type="radio" name="x5">
+<input data-x6="6" type="radio" name="x6">
+<input data-x7="6" type="radio" name="x7">
+<input data-x8="6" type="radio" name="x8">
+<input data-y0="6" type="radio" name="y0">
+<input data-y1="6" type="radio" name="y1">
+<input data-y2="6" type="radio" name="y2">
+<input data-y3="6" type="radio" name="y3">
+<input data-y4="6" type="radio" name="y4">
+<input data-y5="6" type="radio" name="y5">
+<input data-y6="6" type="radio" name="y6">
+<input data-y7="6" type="radio" name="y7">
+<input data-y8="6" type="radio" name="y8">
+<input data-c="×" type="radio" name="c">
+<input data-x0="1" type="radio" name="x0">
+<input data-x1="1" type="radio" name="x1">
+<input data-x2="1" type="radio" name="x2">
+<input data-x3="1" type="radio" name="x3">
+<input data-x4="1" type="radio" name="x4">
+<input data-x5="1" type="radio" name="x5">
+<input data-x6="1" type="radio" name="x6">
+<input data-x7="1" type="radio" name="x7">
+<input data-x8="1" type="radio" name="x8">
+<input data-y0="1" type="radio" name="y0">
+<input data-y1="1" type="radio" name="y1">
+<input data-y2="1" type="radio" name="y2">
+<input data-y3="1" type="radio" name="y3">
+<input data-y4="1" type="radio" name="y4">
+<input data-y5="1" type="radio" name="y5">
+<input data-y6="1" type="radio" name="y6">
+<input data-y7="1" type="radio" name="y7">
+<input data-y8="1" type="radio" name="y8">
+<input data-x0="2" type="radio" name="x0">
+<input data-x1="2" type="radio" name="x1">
+<input data-x2="2" type="radio" name="x2">
+<input data-x3="2" type="radio" name="x3">
+<input data-x4="2" type="radio" name="x4">
+<input data-x5="2" type="radio" name="x5">
+<input data-x6="2" type="radio" name="x6">
+<input data-x7="2" type="radio" name="x7">
+<input data-x8="2" type="radio" name="x8">
+<input data-y0="2" type="radio" name="y0">
+<input data-y1="2" type="radio" name="y1">
+<input data-y2="2" type="radio" name="y2">
+<input data-y3="2" type="radio" name="y3">
+<input data-y4="2" type="radio" name="y4">
+<input data-y5="2" type="radio" name="y5">
+<input data-y6="2" type="radio" name="y6">
+<input data-y7="2" type="radio" name="y7">
+<input data-y8="2" type="radio" name="y8">
+<input data-x0="3" type="radio" name="x0">
+<input data-x1="3" type="radio" name="x1">
+<input data-x2="3" type="radio" name="x2">
+<input data-x3="3" type="radio" name="x3">
+<input data-x4="3" type="radio" name="x4">
+<input data-x5="3" type="radio" name="x5">
+<input data-x6="3" type="radio" name="x6">
+<input data-x7="3" type="radio" name="x7">
+<input data-x8="3" type="radio" name="x8">
+<input data-y0="3" type="radio" name="y0">
+<input data-y1="3" type="radio" name="y1">
+<input data-y2="3" type="radio" name="y2">
+<input data-y3="3" type="radio" name="y3">
+<input data-y4="3" type="radio" name="y4">
+<input data-y5="3" type="radio" name="y5">
+<input data-y6="3" type="radio" name="y6">
+<input data-y7="3" type="radio" name="y7">
+<input data-y8="3" type="radio" name="y8">
+<input data-c="-" type="radio" name="c">
+<input data-x0="0" type="radio" name="x0">
+<input data-x1="0" type="radio" name="x1">
+<input data-x2="0" type="radio" name="x2">
+<input data-x3="0" type="radio" name="x3">
+<input data-x4="0" type="radio" name="x4">
+<input data-x5="0" type="radio" name="x5">
+<input data-x6="0" type="radio" name="x6">
+<input data-x7="0" type="radio" name="x7">
+<input data-x8="0" type="radio" name="x8">
+<input data-y0="0" type="radio" name="y0">
+<input data-y1="0" type="radio" name="y1">
+<input data-y2="0" type="radio" name="y2">
+<input data-y3="0" type="radio" name="y3">
+<input data-y4="0" type="radio" name="y4">
+<input data-y5="0" type="radio" name="y5">
+<input data-y6="0" type="radio" name="y6">
+<input data-y7="0" type="radio" name="y7">
+<input data-y8="0" type="radio" name="y8">
+<input data-px0="" type="radio" name="px">
+<input data-px1="" type="radio" name="px">
+<input data-px2="" type="radio" name="px">
+<input data-px3="" type="radio" name="px">
+<input data-px4="" type="radio" name="px">
+<input data-px5="" type="radio" name="px">
+<input data-px6="" type="radio" name="px">
+<input data-px7="" type="radio" name="px">
+<input data-px8="" type="radio" name="px">
+<input data-py0="" type="radio" name="py">
+<input data-py1="" type="radio" name="py">
+<input data-py2="" type="radio" name="py">
+<input data-py3="" type="radio" name="py">
+<input data-py4="" type="radio" name="py">
+<input data-py5="" type="radio" name="py">
+<input data-py6="" type="radio" name="py">
+<input data-py7="" type="radio" name="py">
+<input data-py8="" type="radio" name="py">
+<input data-t="=" type="radio">
+<input data-c="+" type="radio" name="c">
+</form></div>
+</body>
+</html>

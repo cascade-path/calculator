@@ -75,6 +75,7 @@
             <h3>a.入力</h3>
             <section>
                 <p class="p-strong">ラジオボタンを使って入力状態を管理します。</p>
+                <p>以下のラジオボタンを触ってみてください。入力結果が変化します。</p>
                 <p>
                     <input type="radio" name="x" checked>
                     <input type="radio" name="x">
@@ -130,18 +131,28 @@
                 <p class="p-strong">擬似クラス「:checked」で入力状態を判定</p>
                 <p>擬似クラス「:has()」とも併せて使います</p>
                 <p class="p-strong">入力状態に応じたCSS変数を:rootに指定</p>
-                <p class="p-code">:has([data-x].p01:checked) {
-    --x01: 3;
-}</p>
-                <p class="p-strong">CSSカウンターで計算</p>
-                <p>詳細については準備中です</p>
-                <p class="p-code"></p>
+                <p class="p-code">:has([data-x0].p3:checked) {
+    --x0: 3;
+}   <span class="p-code-cmt">/* 百の位を3に設定 */</span></p>
+                <p class="p-strong">計算はcalc()で</p>
+                <p>以下は、CSS変数Xに3桁の数を設定するCSSです。</p>
+                <p class="p-code">:root{
+    --X: calc(var(--x0)*100 + var(--x1)*10 + var(--x2))
+}   <span class="p-code-cmt">/* 百の位を100倍、十の位を10倍にして加算 */</span></p>
             </section>
             <h3>c.出力</h3>
             <section>
                 <p>電卓の上部には計算結果を表示するエリアがあります。</p>
                 <p class="p-strong">CSS変数による演算結果を文字に起こす過程にも苦労しました。</p>
-                <p>計算結果ごとに表示を指定する原始的なものから、CSSアニメーションによる回りくどいもの、CSSカウンターによる画期的なものまで様々です。</p>
+                <p>計算結果ごとに表示を指定する原始的なものから、CSSアニメーションによる回りくどいもの、CSSカウンターによる画期的なものまで様々です。</p>               <p>以下は、掛け算の最小構成。</p>
+                <p class="p-code">#result .digit-x01{
+    counter-reset: n calc(var(--x) * var(--y));
+}
+#result .digit-x01::before{
+    content: counter(n);
+}</p>
+                <p>counter-resetに演算結果をcalc()で設定。</p>
+                <p>複数桁の場合は、var(--x)の部分もcalc()で複雑に設定。</p>
                 <p>ゼロ徐算の表示にも注目してみてください。</p>
             </section>
             <h3>d.UI</h3>

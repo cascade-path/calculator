@@ -125,6 +125,10 @@
             background: #0f0;
             color: #000;
         }
+        p.p-code .p-code-cmt{
+            color: #aaa;
+        }
+
         p.p-link{
             display: inline-block;
             padding: 1em;

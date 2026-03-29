@@ -75,8 +75,55 @@
             <h3>a.入力</h3>
             <section>
                 <p class="p-strong">ラジオボタンを使って入力状態を管理します。</p>
-                <p class="p-code">&lt;input type="radio" name="x01"&gt;</p>
-                <p>この電卓ではこのラジオボタンを百個以上使うことによって、10240000000000000000通りの計算を表現できます。</p>
+                <p>
+                    <input type="radio" name="x" checked>
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                </p>
+                <p>
+                    <input type="radio" name="c">
+                    <input type="radio" name="c">
+                    <input type="radio" name="c">
+                    <input type="radio" name="c" checked>
+                </p>
+                <p>
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y" checked>
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                </p>
+                <p>入力結果：
+                    <span class="test0-x"></span>
+                    <span class="test0-c"></span>
+                    <span class="test0-y"></span>
+                </p>
+                <p class="p-code">&lt;input type="radio" name="x"&gt;
+&lt;input type="radio" name="x"&gt;
+&lt;input type="radio" name="x"&gt;
+&lt;div class="test0-x"&gt;&lt;/div&gt;</p>
+                <p class="p-code">:has([name="x"]:nth-child(1):checked) .test0-x::before{
+    content: "1";
+}
+:has([name="x"]:nth-child(2):checked) .test0-x::before{
+    content: "2";
+}
+:has([name="x"]:nth-child(3):checked) .test0-x::before{
+    content: "3";
+}</p>
+                <p>この電卓ではこのラジオボタンを百個以上使うことによって、8桁×8桁の10240000000000000000通りの計算を表現できます。</p>
             </section>
             <h3>b.演算</h3>
             <section>

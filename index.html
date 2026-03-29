@@ -114,6 +114,11 @@
             background: #222;
             color: var(--main);
             font-family: sans-serif;
+            user-select: all;
+        }
+        p.p-code::selection{
+            background: #0f0;
+            color: #000;
         }
     </style>
 </head>
@@ -151,7 +156,10 @@
                 <p>「制約下でのUI/UX設計」「状態管理をCSSで行う」これらをテーマに制作しました。</p>
             </section>
             <h3>概要</h3>
-            <section>何度もリファクタリングを繰り返して</section>
+            <section>
+                <p>何度もリファクタリングを繰り返して現在の形に至ります。</p>
+                <p>ブラウザによる挙動の違いや誤差の微調整に苦労しました。</p>
+            </section>
             <h3>どうやって作った？</h3>
             <section>aa</section>
         </article>
@@ -168,6 +176,8 @@
                 <p>.</p>
                 <p>追記 )) 全部コードを書くには余白が狭すぎました...</p>
             </section>
+            <section>
+                <p class="p-strong">ここからは前述(?)のコードを4つに分けて解説していきます。</p></section>
             <h3>a.入力</h3>
             <section>
                 <p class="p-strong">ラジオボタンを使って入力状態を管理します。</p>
@@ -185,6 +195,8 @@
             <h3>初代電卓</h3>
             <section>
                 <iframe src="calc_1.html" class="calc-frame"></iframe>
+                <p>
+    <p>追記：初代の電卓は、contentプロパティをcssアニメーションで切り替え、そのanimation-iterationcountをcss変数で制御するものでした。</p></p>
             </section>
             <h3>2代目電卓</h3>
             <section>
@@ -216,7 +228,9 @@
         <article id="article-05">
             <h2>関連作品</h2>
             <section>
-                <p>準備中...</p>
+                <p>CSSの限界を試す作品は他にもあります！</p>
+                <p>診断サイト、乱数発生器ほか...近日公開予定</p>
+                <p>今後の当サイトの発展にご期待ください。</p>
             </section>
         </article>
     </main>

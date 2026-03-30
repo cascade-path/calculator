@@ -116,9 +116,11 @@
 &lt;input type="radio" name="x"&gt;
 &lt;input type="radio" name="x"&gt;
 &lt;div class="test0-x"&gt;&lt;/div&gt;</p>
-                <p class="p-code">:has([name="x"]:nth-child(1):checked) .test0-x::before{
+                <p class="p-code"><span class="p-code-cmt"> /* 一つ目のラジオボタンがチェックされた時、1を表示 */</span>
+:has([name="x"]:nth-child(1):checked) .test0-x::before{
     content: "1";
 }
+<span class="p-code-cmt"> /* 以下同様 */</span>
 :has([name="x"]:nth-child(2):checked) .test0-x::before{
     content: "2";
 }
@@ -132,23 +134,28 @@
                 <p class="p-strong">擬似クラス「:checked」で入力状態を判定</p>
                 <p>擬似クラス「:has()」とも併せて使います</p>
                 <p class="p-strong">入力状態に応じたCSS変数を:rootに指定</p>
-                <p class="p-code">:has([data-x0="3"]:checked) {
+                <p class="p-code"><span class="p-code-cmt">   /* 百の位を3に設定 */</span>
+:has([data-x0="3"]:checked) {
     --x0: 3;
-}   <span class="p-code-cmt">/* 百の位を3に設定 */</span></p>
+}</p>
                 <p class="p-strong">計算はcalc()で</p>
                 <p>以下は、CSS変数Xに3桁の数を設定するCSSです。</p>
-                <p class="p-code">:root{
+                <p class="p-code"><span class="p-code-cmt">   /* 百の位を100倍、十の位を10倍にして加算 */</span>
+:root{
     --X: calc(var(--x0)*100 + var(--x1)*10 + var(--x2))
-}   <span class="p-code-cmt">/* 百の位を100倍、十の位を10倍にして加算 */</span></p>
+}</p>
             </section>
             <h3>c.出力</h3>
             <section>
                 <p>電卓の上部には計算結果を表示するエリアがあります。</p>
                 <p class="p-strong">CSS変数による演算結果を文字に起こす過程にも苦労しました。</p>
-                <p>計算結果ごとに表示を指定する原始的なものから、CSSアニメーションによる回りくどいもの、CSSカウンターによる画期的なものまで様々です。</p>               <p>以下は、掛け算の最小構成。</p>
-                <p class="p-code">#result .digit-x01{
-    counter-reset: n calc(var(--x) * var(--y));
+                <p>計算結果ごとに表示を指定する原始的なものから、CSSアニメーションによるもの、CSSカウンターによるものまで様々です。</p>
+                <p>以下は、CSSカウンターによる出力の最小構成。</p>
+                <p class="p-code"><span class="p-code-cmt">  /* 計算結果エリアにCSSカウンターを定義 */</span>
+#result{
+    counter-reset: n calc(var(--X) * var(--Y));
 }
+<span class="p-code-cmt">  /* CSSカウンターの値を表示 */</span>
 #result .digit-x01::before{
     content: counter(n);
 }</p>

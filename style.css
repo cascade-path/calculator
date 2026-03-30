@@ -127,6 +127,7 @@
         }
         p.p-code .p-code-cmt{
             color: #aaa;
+            user-select: none;
         }
 
         p.p-link{

@@ -5,8 +5,8 @@ All logic is implemented using CSS variables, container queries, and state trans
 This project started as a small experiment and gradually evolved into something… cursed, but fun.
 
 ## Live Demo
-- Latest version: [CodePen link]
-- First prototype (v1): [CodePen link]
+- Latest version: [CodePen link](https://codepen.io/cascade-path/full/WbGzwdG)
+- First prototype (v1): [CodePen link](https://codepen.io/cascade-path/full/myrxBEo)
 
 ## How It Works
 This calculator performs arithmetic operations using only CSS:

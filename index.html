@@ -195,13 +195,13 @@
                 <iframe src="calc_2.html" class="calc-frame"></iframe>
                 <p class="p-strong">CSSアニメーションによる結果表示</p>
                 <p>計算結果::beforeのcontentプロパティをCSSアニメーションで切り替え、そのanimation-iterationcountをcss変数で設定しています。</p>
-                <p class="p-code"><span class="p-code-cmt"> /* j */</span>
-#result{
+                <p class="p-code"><span class="p-code-cmt"> /* 割り算の場合。1の位を表示するコード */</span>
+#result::before{
     animation-name: result;
     animation-duration: 5ms;
     animation-fill-mode: both;
     animation-timing-function: step-end;
-    animation-iteration-count: calc(var(--X) / var(--Y));
+    animation-iteration-count: calc(var(--X) / var(--Y) / 10);
 }
 @keyframes result{
     0%{content:"0"}
@@ -218,11 +218,11 @@
 }</p>
                 <p>アニメーション？どういうこと？という方は、試しにゼロ徐算してみてください。</p>
                 <p class="p-note">*ゼロ徐算すると、多くのブラウザではanimation-iteration-countの値が無限大(infinite)に発散するためアニメーションが無限に続きます。</p>
-                <p>animation-iteration-countは小数値を取りうるため、例えば「2.3」の値を設定するとcontentが"3"の状態で停止するわけです。</p>
-                <p class="p-strong">計算結果が1未満の場合にバグる</p>
+                <p>animation-iteration-countは小数値を取りうるため、例えばXに6、Yに3を代入した場合は「0.2」の値が設定され、contentが"2"の状態で停止するわけです。</p>
+                <p class="p-strong">計算結果が1未満の場合は未対応</p>
                 <p class="p-strong">Chromium以外では丸め誤差が発生</p>
                 <p>計算結果が小数や負の数になる場合に対応したい！</p>
-                <p>一桁同士の計算じゃ物足りない！</p>
+                <p>1桁同士の計算じゃ物足りない！</p>
             </section>
             <h3>3代目電卓</h3>
             <section>

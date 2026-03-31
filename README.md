@@ -31,7 +31,7 @@ This calculator performs arithmetic operations using only CSS:
 
 ---
 
-## ✨ Features
+## 🔧 Features
 
 - Pure CSS logic (0% JS)
 - Supports **+, -, ×, ÷**

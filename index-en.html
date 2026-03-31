@@ -113,6 +113,124 @@
                 <p>Input result:
                     <span class="test0-x"></span>
                     <span class="test0-c"></span>
+                    <span class="test0-y"></span>
+                </p>
+                <p class="p-code">&lt;input type="radio" name="x"&gt;
+&lt;input type="radio" name="x"&gt;
+&lt;input type="radio" name="x"&gt;
+&lt;div class="test0-x"&gt;&lt;/div&gt;</p>
+                <p class="p-code"><span class="p-code-cmt"> /* Display “1” when the first radio button is checked */</span>
+:has([name=“x”]:nth-child(1):checked) .test0-x::before{
+    content: “1”;
+}
+<span class="p-code-cmt"> /* Same as above */</span>
+:has([name=“x”]:nth-child(2):checked) .test0-x::before{
+    content: “2”;
+}
+:has([name=“x”]:nth-child(3):checked) .test0-x::before{
+    content: “3”;
+}</p>
+                <p>By using over 100 of these radio buttons in this calculator, we can represent 10,240,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000 </p>
+            </section>
+            <h3>b. Operations</h3>
+            <section>
+                <p class="p-strong">Determining input state using the “:checked” pseudo-class</p>
+                <p>Used in conjunction with the “:has()” pseudo-class</p>
+                <p class="p-strong">Specify CSS variables for :root based on the input state</p>
+                <p class="p-code"><span class="p-code-cmt">   /* Set the hundreds digit to 3 */</span>
+:has([data-x0=“3”]:checked) {
+    --x0: 3;
+} </p>
+                <p class="p-strong">Perform calculations using calc()</p>
+                <p>The following CSS sets a three-digit number to the CSS variable X.</p>
+                <p class="p-code"><span class="p-code-cmt">   /* Multiply the hundreds digit by 100, multiply the tens digit by 10, and add them together */</span>
+:root{
+    --X: calc(var(--x0)*100 + var(--x1)*10 + var(--x2))
+}</p>
+            </section>
+            <h3>c. Output</h3>
+            <section>
+                <p>There is an area at the top of the calculator to display the calculation results.</p>
+                <p class="p-strong">I also struggled with the process of converting the results of CSS variable calculations into text.</p>
+                <p>The approaches range from primitive methods that specify the display for each calculation result, to those using CSS animations, and those using CSS counters.</p>
+                <p>The following is the minimal configuration for output using CSS counters.</p>
+                <p class="p-code"><span class="p-code-cmt">  /* Define a CSS counter for the calculation result area */</span>
+#result{
+    counter-reset: n calc(var(--X) * var(--Y));
+}
+<span class="p-code-cmt">  /* Display the CSS counter value */</span>
+#result .digit-x01::before{
+    content: counter(n);
+}</p>
+                <p>Set the calculation result in `counter-reset` using `calc()`.</p>
+                <p>For multi-digit numbers, the `var(--x)` part is also set using a complex `calc()` expression.</p>
+                <p>Please also take a look at how the zero-based counter is displayed. </p>
+            </section>
+            <h3>d.UI</h3>
+            <section>
+                <p>We paid meticulous attention not only to calculation accuracy but also to the UI. </p>
+                <p>This calculator uses over a hundred radio buttons, but </p>
+                <p class="p-strong">we change the button display state based on the input status </p>
+                <p>or disabled. </p>
+                <p class="p-note">*To simplify the code, we transformed the radio buttons into regular buttons without using wrappers. </p>
+                <p class="p-strong">Implementation of special buttons such as the reset button</p>
+                <p>—please also take note of the evolution of the design based on grid layouts. </p>
+            </section>
+        </article>
+        <article id="article-03">
+            <h2>History of the Calculator</h2>
+            <h3>The First Calculator</h3>
+            <section>
+                <iframe src="calc_1.html" class="calc-frame"></iframe>
+                <p>It can only perform multiplication. </p>
+                <p class="p-strong">Set the calculation result to the “element width” and reference it with @container</p>
+                <p>The width of the dummy element is specified using the calc() function in a CSS variable, and that width is retrieved via @container to display the calculation result based on conditional branching. </p>
+                <p class="p-strong">Whether it’s 3×4 or 6×2, it reaches the same conditional branch. </p>
+                <p>The reset button was implemented from the very first version. </p>
+                <p class="p-code">&lt;input type="reset"&gt;</p>
+                <p>Since this was the author’s first-ever CSS calculator, it was groundbreaking at the time.</p>
+                <p>However, the biggest drawback of this calculator is that the amount of code increases proportionally to the number of calculation results.</p>
+            </section>
+            <h3>Second-generation calculator</h3>
+            <section>
+                <iframe src="calc_2.html" class="calc-frame"></iframe>
+                <p class="p-strong">Displaying results using CSS animations</p>
+                <p>The `content` property of the calculation result's pseudo-element (::before) is toggled using a CSS animation, and its `animation-iteration-count` is set via a CSS variable. </p>
+                <p class="p-code"><span class="p-code-cmt"> /* For division. Code to display the ones digit */</span>
+#result::before{
+    animation-name: result;
+    animation-duration: 5ms;
+    animation-fill-mode: both;
+    animation-timing-function: step-end;
+    animation-iteration-count: calc(var(--X) / var(--Y) / 10);
+}
+@keyframes result{
+    0%{ content: “0”; }
+    10%{ content: “1”; }
+    20%{ content: “2”; }
+    30%{ content: “3”; }
+    40%{ content: “4”; }
+    50%{ content: “5”; }
+    60%{ content: “6”; }
+    70%{ content: “7”; }
+    80%{ content: “8”; }
+    90%{ content: “9”; }
+    100% {content: “0”; }
+}</p>
+                <p>Animation? What does that mean? If you're wondering, try performing a zero-based calculation. </p>
+                <p class="p-note">*When performing a zero-based calculation, in many browsers the value of `animation-iteration-count` diverges to infinity, causing the animation to continue indefinitely. </p>
+                <p>Since `animation-iteration-count` can take on decimal values, for example, if you substitute 6 for X and 3 for Y, the value “0.2” is set, and the animation stops with `content` set to “2”.</p>
+                <p>...In this way, I’ve elegantly solved the problem of code volume increasing in proportion to the calculation pattern...</p>
+                <p class="p-strong">Does not support results less than 1</p>
+                <p class="p-strong">Rounding errors occur in browsers other than Chromium</p>
+                <p>I want to handle cases where the result is a decimal or a negative number!</p>
+                <p>Calculations involving just single-digit numbers aren’t enough!</p>
+            </section>
+            <h3>3rd-generation calculator</h3>
+            <section>
+                <iframe src="calc_3.html" class="calc-frame"></iframe>
+                <p class="p-strong">Finally supports multiple digits</p>
+            
 
 
 

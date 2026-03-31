@@ -164,7 +164,7 @@
 }</p>
                 <p>Set the calculation result in `counter-reset` using `calc()`.</p>
                 <p>For multi-digit numbers, the `var(--x)` part is also set using a complex `calc()` expression.</p>
-                <p>Please also take a look at how the zero-based counter is displayed. </p>
+                <p>Please also take a look at how the division by zero counter is displayed. </p>
             </section>
             <h3>d.UI</h3>
             <section>
@@ -218,7 +218,7 @@
     100% {content: “0”; }
 }</p>
                 <p>Animation? What does that mean? If you're wondering, try performing a division by zero. </p>
-                <p class="p-note">*When performing a zero-based calculation, in many browsers the value of `animation-iteration-count` diverges to infinity, causing the animation to continue indefinitely. </p>
+                <p class="p-note">*When performing a division by zero, in many browsers the value of `animation-iteration-count` diverges to infinity, causing the animation to continue indefinitely. </p>
                 <p>Since `animation-iteration-count` can take on decimal values, for example, if you substitute 6 for X and 3 for Y, the value “0.2” is set, and the animation stops with `content` set to “2”.</p>
                 <p>...In this way, I’ve elegantly solved the problem of code volume increasing in proportion to the calculation pattern...</p>
                 <p class="p-strong">Does not support results less than 1</p>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Calculator Special Site | Cascade-path</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Kosugi+Maru&family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200.. 900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="h-title">CSS Calculator Special Site</div>
+    </header>
+    <main>
+        <nav>
+            <div class="nav-top">INDEX</div>
+            <a href="#article-01"><div>What is the CSS Calculator?</div></a>
+            <a href="#article-02"><div>Mechanism & Code Explanation</div></a>
+            <a href="#article-03"><div>History of the Calculator</div></a>
+            <a href="#article-04"><div>Exclusive Preview of the Latest Calculator!</div></a>
+            <a href="#article-05"><div>Related Works</div></a>
+        </nav>
+        <article id="article-01">
+            <h2>What is the CSS Calculator?</h2>
+            <section>
+                <p class="p-strong">This is a calculator built entirely with HTML and CSS, without using any JavaScript. </p>
+                <p></p>
+                <p>Normally, “computational processing” and “state management” for calculators require scripting languages like JavaScript, but this project implements the four basic arithmetic operations using only CSS. </p>
+                <p>For those wondering, “What is CSS?”, the explanation page is.....</p>
+                <p>Sorry, there isn't one. </p>
+                <p>(Since this site focuses on the “limits of CSS,” we have omitted basic explanations.)</p>
+            </section>
+            <h3>Can it really perform calculations? </h3>
+            <section>
+                <p>First, let me show you the actual calculator. </p>
+                <iframe src="calc_0.html" class="calc-frame"></iframe>
+                <p>Please try performing a calculation yourself. </p>
+                <p>Were you able to perform arithmetic operations on three-digit numbers? </p>
+                <p>Example) 308 × 912 = 280896 </p>
+                <p>*Behavior may vary by browser, but Chromium-based browsers have the fewest bugs.</p>
+            </section>
+            <h3>Objective</h3>
+            <section>
+                <p class="p-strong">I wanted to understand the limits of CSS</p>
+                <p>I took on the challenge of “UI/UX design under constraints” and “managing button states using CSS.” </p>
+            </section>
+            <h3>Overview</h3>
+            <section>
+                <p>I had a flash of inspiration while poring over CSS specifications. </p>
+                <p>I kept up with the latest CSS features, such as :has(), and refactored the code repeatedly until it reached its current form. </p>
+                <p>I struggled with browser-specific behavior differences and rounding errors in `calc()` for decimal calculations, so I adjusted the combination of CSS variables many times. </p>
+            </section>
+            <h3>How was it made? </h3>
+            <section>
+                <p>I’ll describe the detailed trial-and-error process later, but here’s a brief summary. </p>
+                <p class="p-strong">Skip this section unless you’re in a hurry</p>
+                <p>(It’s still a work in progress...)</p>
+            </section>
+        </article>
+        <article id="article-02">
+            <h2>Mechanism & Code Explanation</h2>
+            <section>
+                <p>Without further ado, here’s the code. </p>
+                <p class="p-code">&lt;form&gt;</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>...I want to display this </p>
+                <p>.</p>
+                <p>Update )) There wasn't enough space to write all the code...</p>
+                <p class="p-note">*The code is available <a href="https://github.com/cascade-path/calculator/blob/main/calc_0.html" target="_blank">here</a>.</p>
+            </section>
+            <section>
+                <p class="p-strong">From here on, I’ll explain the code mentioned earlier (?) by breaking it down into four parts. </p></section>
+            <h3>a. Input </h3>
+            <section>
+                <p class="p-strong">We’ll use radio buttons to manage the input state. </p>
+                <p>Try clicking the radio buttons below. The input result will change. </p>
+                <p class="p-note">*Each button corresponds to a number or other value. </p>
+                <p>X
+                    <input type="radio" name="x" checked>
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                </p>
+                <p>Operator
+                    <input type="radio" name="c">
+                    <input type="radio" name="c">
+                    <input type="radio" name="c">
+                    <input type="radio" name="c" checked>
+                    <input type="radio" name="c">
+                </p>
+                <p>Y
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y" checked>
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                </p>
+                <p>Input result:
+                    <span class="test0-x"></span>
+                    <span class="test0-c"></span>
+                 

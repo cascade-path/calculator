@@ -15,7 +15,7 @@ This repo includes **multiple prototypes**, including early experimental version
 - **Latest version:** https://codepen.io/cascade-path/full/WbGzwdG  
 - **First prototype (v1):** https://codepen.io/cascade-path/full/myrxBEo  
 
-More versions are included in this repo.
+More versions — including experimental builds — are included in this repo.
 
 ---
 

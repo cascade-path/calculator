@@ -62,7 +62,7 @@ Some are broken, some are cursed, all are fun.
 
 ## 🖼️ Screenshots
 
-*(Image removed for safety — add your own GIF or PNG here)*
+[calculator](calc.gif)
 
 ---
 

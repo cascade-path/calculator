@@ -3,38 +3,363 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSS Calculator Special Site | Cascade-path</title>
+    <title>CSS電卓特設サイト | Cascade-path</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Kosugi+Maru&family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200.. 900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=Kosugi+Maru&family=Mochiy+Pop+One&family=Noto+Sans+JP:wght@100..900&family=Noto+Serif+JP:wght@200..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
-        <div class="h-title">CSS Calculator Special Site</div>
+        <div class="h-title">CSS電卓特設サイト</div>
     </header>
     <main>
         <nav>
             <div class="nav-top">INDEX</div>
-            <a href="#article-01"><div>What is the CSS Calculator?</div></a>
-            <a href="#article-02"><div>Mechanism & Code Explanation</div></a>
-            <a href="#article-03"><div>History of the Calculator</div></a>
-            <a href="#article-04"><div>Exclusive Preview of the Latest Calculator!</div></a>
-            <a href="#article-05"><div>Related Works</div></a>
+            <a href="#article-01"><div>css電卓とは</div></a>
+            <a href="#article-02"><div>仕組み・コード解説</div></a>
+            <a href="#article-03"><div>電卓の歴史</div></a>
+            <a href="#article-04"><div>最新の電卓を特別に公開！</div></a>
+            <a href="#article-05"><div>関連作品</div></a>
         </nav>
         <article id="article-01">
-            <h2>What is the CSS Calculator?</h2>
+            <h2>CSS電卓とは</h2>
             <section>
-                <p class="p-strong">This is a calculator built entirely with HTML and CSS, without using any JavaScript. </p>
+                <p class="p-strong">Javascriptを一切使用せず、HTMLとCSSだけで構築された電卓です。</p>
                 <p></p>
-                <p>Normally, “computational processing” and “state management” for calculators require scripting languages like JavaScript, but this project implements the four basic arithmetic operations using only CSS. </p>
-                <p>For those wondering, “What is CSS?”, the explanation page is.....</p>
-                <p>Sorry, there isn't one. </p>
-                <p>(Since this site focuses on the “limits of CSS,” we have omitted basic explanations.)</p>
+                <p>通常、電卓のような「計算処理」や「状態管理」はJavaScriptなどのスクリプト言語が必須ですが、本作品ではCSSのみで四則演算を実現しています。</p>
+                <p>CSSって何？という方向けの、解説ページは.....</p>
+                <p>すみません、ありません。</p>
+                <p>(本サイトは“CSSの限界”をテーマにしているため、基礎説明は割愛しています)</p>
             </section>
-            <h3>Can it really perform calculations? </h3>
+            <h3>本当に計算できるの？</h3>
             <section>
-                <p>First, let me show you the actual calculator. </p>
+                <p>まずは実物をお見せします。</p>
+                <iframe src="calc_0.html" class="calc-frame"></iframe>
+                <p>実際に計算してみてください。</p>
+                <p>3桁の数同士の四則演算はできましたか？</p>
+                <p>例) 308 × 912 = 280896</p>
+                <p>※挙動はブラウザによって変わりますが、Chromium系でバグが最小になります。</p>
+            </section>
+            <h3>目的</h3>
+            <section>
+                <p class="p-strong">CSSの限界を知りたい</p>
+                <p>「制約下でのUI/UX設計」「ボタンの押下状態の管理をCSSで行う」これらをテーマに挑戦しました。</p>
+            </section>
+            <h3>概要</h3>
+            <section>
+                <p>CSS仕様書を読み漁っていたら閃きました。</p>
+                <p>:has()など最新のCSSを追いながら、何度もリファクタリングを繰り返して現在の形に至ります。</p>
+                <p>ブラウザによる挙動の違いや小数計算のcalc()の丸め誤差に悩まされ、CSS変数の組み合わせ方を何度も調整しました。</p>
+            </section>
+            <h3>どうやって作った？</h3>
+            <section>
+                <p>後ほど詳細な試行錯誤の過程を記述しますが、ここでは手短にまとめます。</p>
+                <p class="p-strong">忙しい人以外はこのセクションをパスしてください</p>
+                <p>(まだ準備中なので...)</p>
+            </section>
+        </article>
+        <article id="article-02">
+            <h2>仕組み・コード解説</h2>
+            <section>
+                <p>勿体ぶらずに、まずはコードを出します。</p>
+                <p class="p-code">&lt;form&gt;</p>
+                <p>.</p>
+                <p>.</p>
+                <p>.</p>
+                <p>...出したいです</p>
+                <p>.</p>
+                <p>追記 )) 全部コードを書くには余白が狭すぎました...</p>
+                <p class="p-note">*コードは<a href="https://github.com/cascade-path/calculator/blob/main/calc_0.html" target="_blank">こちら</a>で公開しています。</p>
+            </section>
+            <section>
+                <p class="p-strong">ここからは前述(?)のコードを4つに分けて解説していきます。</p></section>
+            <h3>a.入力</h3>
+            <section>
+                <p class="p-strong">ラジオボタンを使って入力状態を管理します。</p>
+                <p>以下のラジオボタンを触ってみてください。入力結果が変化します。</p>
+                <p class="p-note">*各ボタンが数字などに対応しています。</p>
+                <p>X
+                    <input type="radio" name="x" checked>
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                    <input type="radio" name="x">
+                </p>
+                <p>演算子
+                    <input type="radio" name="c">
+                    <input type="radio" name="c">
+                    <input type="radio" name="c">
+                    <input type="radio" name="c" checked>
+                    <input type="radio" name="c">
+                </p>
+                <p>Y
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y" checked>
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                    <input type="radio" name="y">
+                </p>
+                <p>入力結果：
+                    <span class="test0-x"></span>
+                    <span class="test0-c"></span>
+                    <span class="test0-y"></span>
+                </p>
+                <p class="p-code">&lt;input type="radio" name="x"&gt;
+&lt;input type="radio" name="x"&gt;
+&lt;input type="radio" name="x"&gt;
+&lt;div class="test0-x"&gt;&lt;/div&gt;</p>
+                <p class="p-code"><span class="p-code-cmt"> /* 一つ目のラジオボタンがチェックされた時、1を表示 */</span>
+:has([name="x"]:nth-child(1):checked) .test0-x::before{
+    content: "1";
+}
+<span class="p-code-cmt"> /* 以下同様 */</span>
+:has([name="x"]:nth-child(2):checked) .test0-x::before{
+    content: "2";
+}
+:has([name="x"]:nth-child(3):checked) .test0-x::before{
+    content: "3";
+}</p>
+                <p>この電卓ではこのラジオボタンを百個以上使うことによって、8桁×8桁の10240000000000000000通りの計算を表現できます。</p>
+            </section>
+            <h3>b.演算</h3>
+            <section>
+                <p class="p-strong">擬似クラス「:checked」で入力状態を判定</p>
+                <p>擬似クラス「:has()」とも併せて使います</p>
+                <p class="p-strong">入力状態に応じたCSS変数を:rootに指定</p>
+                <p class="p-code"><span class="p-code-cmt">   /* 百の位を3に設定 */</span>
+:has([data-x0="3"]:checked) {
+    --x0: 3;
+}</p>
+                <p class="p-strong">計算はcalc()で</p>
+                <p>以下は、CSS変数Xに3桁の数を設定するCSSです。</p>
+                <p class="p-code"><span class="p-code-cmt">   /* 百の位を100倍、十の位を10倍にして加算 */</span>
+:root{
+    --X: calc(var(--x0)*100 + var(--x1)*10 + var(--x2))
+}</p>
+            </section>
+            <h3>c.出力</h3>
+            <section>
+                <p>電卓の上部には計算結果を表示するエリアがあります。</p>
+                <p class="p-strong">CSS変数による演算結果を文字に起こす過程にも苦労しました。</p>
+                <p>計算結果ごとに表示を指定する原始的なものから、CSSアニメーションによるもの、CSSカウンターによるものまで様々です。</p>
+                <p>以下は、CSSカウンターによる出力の最小構成。</p>
+                <p class="p-code"><span class="p-code-cmt">  /* 計算結果エリアにCSSカウンターを定義 */</span>
+#result{
+    counter-reset: n calc(var(--X) * var(--Y));
+}
+<span class="p-code-cmt">  /* CSSカウンターの値を表示 */</span>
+#result .digit-x01::before{
+    content: counter(n);
+}</p>
+                <p>counter-resetに演算結果をcalc()で設定。</p>
+                <p>複数桁の場合は、var(--x)の部分もcalc()で複雑に設定。</p>
+                <p>ゼロ徐算の表示にも注目してみてください。</p>
+            </section>
+            <h3>d.UI</h3>
+            <section>
+                <p>計算の精度だけでなく、UIもこだわり抜きました。</p>
+                <p>この電卓にはラジオボタンが百個以上使われていますが、</p>
+                <p class="p-strong">入力状態に応じてボタンの表示状態を変更</p>
+                <p>したり、disabled化しています。</p>
+                <p class="p-note">*コード単純化の観点から、ラジオボタンにラッパーをつけずに変形させてボタンにしています。</p>
+                <p class="p-strong">リセットボタンなど特殊ボタンの実装</p>
+                <p>、そしてグリッドレイアウトを基盤としたデザインの進化にも注目してみてください。</p>
+            </section>
+        </article>
+        <article id="article-03">
+            <h2>電卓の歴史</h2>
+            <h3>初代電卓</h3>
+            <section>
+                <iframe src="calc_1.html" class="calc-frame"></iframe>
+                <p>かけ算のみ計算できます。</p>
+                <p class="p-strong">計算結果を「要素の幅」に設定、@containerで参照</p>
+                <p>ダミー要素の幅をcss変数のcalc()の形で指定し、その幅を@containerで取得し、条件分岐して計算結果を表示しています。</p>
+                <p class="p-strong">3×4でも、6×2でも同じ分岐にたどり着きます。</p>
+                <p>リセットボタンは初代から実装していました。</p>
+                <p class="p-code">&lt;input type="reset"&gt;</p>
+                <p>この電卓は、筆者史上初のCSS電卓であるため、当時としては画期的でした。</p>
+                <p>しかし、この電卓の最大の欠点として、計算結果の数に比例してコード量が増えてしまう点が挙げられます。</p>
+            </section>
+            <h3>2代目電卓</h3>
+            <section>
+                <iframe src="calc_2.html" class="calc-frame"></iframe>
+                <p class="p-strong">CSSアニメーションによる結果表示</p>
+                <p>計算結果の擬似要素(::before)のcontentプロパティをCSSアニメーションで切り替え、そのanimation-iteration-countをcss変数で設定しています。</p>
+                <p class="p-code"><span class="p-code-cmt"> /* 割り算の場合。1の位を表示するコード */</span>
+#result::before{
+    animation-name: result;
+    animation-duration: 5ms;
+    animation-fill-mode: both;
+    animation-timing-function: step-end;
+    animation-iteration-count: calc(var(--X) / var(--Y) / 10);
+}
+@keyframes result{
+    0%{ content: "0"; }
+    10%{ content: "1"; }
+    20%{ content: "2"; }
+    30%{ content: "3"; }
+    40%{ content: "4"; }
+    50%{ content: "5"; }
+    60%{ content: "6"; }
+    70%{ content: "7"; }
+    80%{ content: "8"; }
+    90%{ content: "9"; }
+    100% {content: "0"; }
+}</p>
+                <p>アニメーション？どういうこと？という方は、試しにゼロ徐算してみてください。</p>
+                <p class="p-note">*ゼロ徐算すると、多くのブラウザではanimation-iteration-countの値が無限大(infinite)に発散するためアニメーションが無限に続きます。</p>
+                <p>animation-iteration-countは小数値を取りうるため、例えばXに6、Yに3を代入した場合は「0.2」の値が設定され、contentが"2"の状態で停止するわけです。</p>
+                <p>・・・このように、計算パターンに比例してコード量が増える問題を華麗に解決したのですが...</p>
+                <p class="p-strong">計算結果が1未満の場合は未対応</p>
+                <p class="p-strong">Chromium以外では丸め誤差が発生</p>
+                <p>計算結果が小数や負の数になる場合に対応したい！</p>
+                <p>1桁同士の計算じゃ物足りない！</p>
+            </section>
+            <h3>3代目電卓</h3>
+            <section>
+                <iframe src="calc_3.html" class="calc-frame"></iframe>
+                <p class="p-strong">ついに複数桁対応</p>
+                <p class="p-strong">ついにマイナス対応</p>
+                <p class="p-strong">ブラウザ間の挙動の差を是正</p>
+                <p class="p-strong">UI大幅変更</p>
+                <p>CSSカウンターによる結果表示に切り替えました。</p>
+                <p class="p-note">*CSSアニメーションの方法と比較して、Safariでの誤差をほぼ無くせます。Firefoxでも誤差を最小限に抑えました。</p>
+                <p>計算結果が負の数になる場合を対応しました。</p>
+                <p>UIの改良を行い、disabled化を進めました。</p>
+                <p>計算結果が小数値を取りうる割り算のみ、２代目電卓のアニメーションによる出力を採用しました。</p>
+                <p class="p-strong">割り算の計算結果が気持ち悪い</p>
+                <p>試しに「3÷9」を計算すると、「00000000.333333」と出力され、頭に0が付いてしまいます。</p>
+                <p class="p-strong">それに、拡張性も低い。</p>
+                <p>符号変更、浮動小数点、1文字消去などの機能を実装するには、コードの再構築が必要でした。</p>
+            </section>
+            <h3>4代目電卓へ</h3>
+            <section>
+                <iframe src="calc_0.html" class="calc-frame"></iframe>
+                <p class="p-strong">UIを一新し、より電卓らしくなりました。</p>
+                <p class="p-strong">46000以下の数同士なら、全ブラウザで誤差なし</p>
+                <p>符号を変更できるようになりました。</p>
+                <p>割り算は整数部分出力のみcssカウンターを使用することにより、頭に0がつく問題を解消。</p>
+                <p>割り切れない場合に「...」をつけました。</p>
+                <p class="p-strong">1文字だけ消す機能⌫が欲しい</p>
+                <p class="p-strong">小数同士の計算ができるようにしたい</p>
+                <p class="p-strong">全体を名前空間化して扱いやすくしたい</p>
+                <p class="p-note">*「:has()」が頭につくセレクターは、読み込み速度がページサイズに依存するため、@scopeで囲むことで解消を図りたい。</p>
+            </section>
+            <h3>番外編：最小構成の電卓</h3>
+            <section>
+                <div class="calc-wrap">
+    <div style="--n:1">
+        <input type="checkbox">1
+    </div>
+    <div style="--n:2">
+        <input type="checkbox">2
+    </div>
+    <div style="--n:3">
+        <input type="checkbox">3
+    </div>
+    <div style="--n:4">
+        <input type="checkbox">4
+    </div>
+    <div style="--n:5">
+        <input type="checkbox">5
+    </div>
+    <div style="--n:6">
+        <input type="checkbox">6
+    </div>
+    <div style="--n:7">
+        <input type="checkbox">7
+    </div>
+    <div style="--n:8">
+        <input type="checkbox">8
+    </div>
+    <div class="result">合計は：</div>
+</div>
+                <p class="p-code">&lt;div class="calc-wrap"&gt;
+    &lt;div style="--n:1"&gt;
+        &lt;input type="checkbox"&gt;1
+    &lt;/div&gt;
+    &lt;div style="--n:2"&gt;
+        &lt;input type="checkbox"&gt;2
+    &lt;/div&gt;
+    &lt;div style="--n:3"&gt;
+        &lt;input type="checkbox"&gt;3
+    &lt;/div&gt;
+    &lt;div style="--n:4"&gt;
+        &lt;input type="checkbox"&gt;4
+    &lt;/div&gt;
+    &lt;div style="--n:5"&gt;
+        &lt;input type="checkbox"&gt;5
+    &lt;/div&gt;
+    &lt;div style="--n:6"&gt;
+        &lt;input type="checkbox"&gt;6
+    &lt;/div&gt;
+    &lt;div style="--n:7"&gt;
+        &lt;input type="checkbox"&gt;7
+    &lt;/div&gt;
+    &lt;div style="--n:8"&gt;
+        &lt;input type="checkbox"&gt;8
+    &lt;/div&gt;
+    &lt;div class="result"&gt;合計は：&lt;/div&gt;
+&lt;/div&gt;</p>
+                <p class="p-code">.calc-wrap :has(:checked) {
+    counter-increment: n var(--n);
+}
+.calc-wrap .result::after {
+    content: counter(n);
+}</p>
+            <p>コードはフリーです。自由にご参照ください。</p>
+            </section>
+        </article>
+        <article id="article-04">
+            <h2>最新の電卓を特別に公開！</h2>
+            <section>
+                <iframe src="calc_5.html" class="calc-frame"></iframe>
+                <p class="p-strong">小数同士の計算ができます。</p>
+                <p class="p-strong">一文字を消す機能「⌫」も実装しました！</p>
+                <p class="p-strong">CSSを@scopeで囲み、扱いやすくなりました</p>
+                <p class="p-note">*5÷(-8)など、計算結果が-1以上0未満になる計算で誤った結果が出力される場合があります。符号(+/-)を変更した場合は特に。</p>
+                <p class="p-note">*計算結果の上限は±2147683647です。</p>
+                <p>さて、ボタンが1つだけ余りましたね ( 「?」のボタン、拡張用 )。</p>
+                <p>良い使い道が見つかりましたら今後実装していこうと思いますので今後もよろしくお願いします!!</p>
+            </section>
+        </article>
+        <article id="article-05">
+            <h2>関連作品</h2>
+            <section>
+                <p>CSSの限界を試す作品は他にもあります！</p>
+                <p>診断サイト、乱数発生器、SPA、まるばつゲームほか...近日公開予定</p>
+                <p>今後の当サイトの発展にご期待ください。</p>
+            </section>
+            <h3>まるばつゲーム</h3>
+            <section>
+                <iframe src="marubatsu.html" class="marubatsu-frame"></iframe>
+                <a href="marubatsu.html" target="_blank"><p class="p-link">リンク</p></a>
+            </section>
+            <h3>SPA</h3>
+            <section>
+                <iframe src="font_spa.html" class="spa-frame"></iframe>
+                <a href="font_spa.html" target="_blank"><p class="p-link">リンク</p></a>
+            </section>
+        </article>
+    </main>
+    <aside></aside>
+    <footer>
+        <div>&copy; 2026 cascade-path</div>
+        <a href="https://cascade-path.github.io/portfolio/index.html" target="_blank"><div>Cascade-path's Portfolio</div></a>
+    </footer>
+</body>
+</html>                <p>First, let me show you the actual calculator. </p>
                 <iframe src="calc_0.html" class="calc-frame"></iframe>
                 <p>Please try performing a calculation yourself. </p>
                 <p>Were you able to perform arithmetic operations on three-digit numbers? </p>

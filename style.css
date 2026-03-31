@@ -101,6 +101,9 @@
         }
 
         /* コマンド */
+        p{
+            overflow-wrap: break-word;
+        }
         p.p-strong{
             padding: .5em;
             border-radius: .3em;

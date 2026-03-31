@@ -230,6 +230,136 @@
             <section>
                 <iframe src="calc_3.html" class="calc-frame"></iframe>
                 <p class="p-strong">Finally supports multiple digits</p>
+                <p class="p-strong">Finally supports negative values</p>
+                <p class="p-strong">Corrects behavior differences across browsers</p>
+                <p class="p-strong">Major UI changes</p>
+                <p>We have switched to displaying results using CSS counters. </p>
+                <p class="p-note">*Compared to the CSS animation method, this virtually eliminates errors in Safari. We have also minimized errors in Firefox. </p>
+                <p>Added support for cases where the calculation result is a negative number. </p>
+                <p>Improved the UI and made more elements disabled. </p>
+                <p>We have adopted the animation-based output from the second-generation calculator only for division operations where the result can be a decimal number. </p>
+                <p class="p-strong">The division results look odd. </p>
+                <p>For example, when calculating “3÷9,” it outputs “00000000.333333,” resulting in a leading zero. </p>
+                <p class="p-strong">Furthermore, it has limited extensibility. </p>
+                <p>Implementing features such as sign reversal, floating-point operations, and single-character deletion required a complete rewrite of the code. </p>
+            </section>
+            <h3>To the 4th-generation calculator </h3>
+            <section>
+                <iframe src="calc_0.html" class="calc-frame"></iframe>
+                <p class="p-strong">The UI was completely redesigned to look more like a calculator. </p>
+                <p class="p-strong">For numbers up to 46,000, there is no error in any browser. </p>
+                <p>It is now possible to change the sign. </p>
+                <p>For division, we now output only the integer part; by using CSS counters, we’ve resolved the issue of leading zeros. </p>
+                <p>We’ve added “...” when the division isn’t exact. </p>
+                <p class="p-strong">I’d like a feature to delete just one character⌫ </p>
+                <p class="p-strong">I’d like to enable calculations between decimals </p>
+                <p class="p-strong">I want to put the whole thing in a namespace to make it easier to handle</p>
+                <p class="p-note">* Since load speed for selectors prefixed with “:has()” depends on page size, I want to resolve this by wrapping them in @scope.</p>
+            </section>
+            <h3>Bonus: Minimalist calculator</h3>
+            <section>
+                <div class="calc-wrap">
+    <div style="--n:1">
+        <input type="checkbox">1
+    </div>
+    <div style="--n:2">
+        <input type="checkbox">2
+    </div>
+    <div style="--n:3">
+        <input type="checkbox">3
+    </div>
+    <div style="--n:4">
+        <input type="checkbox">4
+    </div>
+    <div style="--n:5">
+        <input type="checkbox">5
+    </div>
+    <div style="--n:6">
+        <input type="checkbox">6
+    </div>
+    <div style="--n:7">
+        <input type="checkbox">7
+    </div>
+    <div style="--n:8">
+        <input type="checkbox">8
+    </div>
+    <div class="result">Total: </div>
+</div>
+                <p class="p-code">&lt;div class="calc-wrap"&gt;
+    &lt;div style="--n:1"&gt;
+        &lt;input type="checkbox"&gt;1
+    &lt;/div&gt;
+    &lt;div style="--n:2"&gt;
+        &lt;input type="checkbox"&gt;2
+    &lt;/div&gt;
+    &lt;div style="--n:3"&gt;
+        &lt;input type="checkbox"&gt;3
+    &lt;/div&gt;
+    &lt;div style="--n:4"&gt;
+        &lt;input type="checkbox"&gt;4
+    &lt;/div&gt;
+    &lt;div style="--n:5"&gt;
+        &lt;input type="checkbox"&gt;5
+    &lt;/div&gt;
+    &lt;div style="--n:6"&gt;
+        &lt;input type="checkbox"&gt;6
+    &lt;/div&gt;
+    &lt;div style="--n:7"&gt;
+        &lt;input type="checkbox"&gt;7
+    &lt;/div&gt;
+    &lt;div style="--n:8"&gt;
+        &lt;input type="checkbox"&gt;8
+    &lt;/div&gt;
+    &lt;div class="result"&gt;Total:&lt;/div&gt;
+&lt;/div&gt;</p>
+                <p class="p-code">.calc-wrap :has(:checked) {
+    counter-increment: n var(--n);
+}
+.calc-wrap .result::after {
+    content: counter(n);
+}</p>
+            <p>The code is free. Feel free to use it as a reference. </p>
+            </section>
+        </article>
+        <article id="article-04">
+            <h2>Exclusive release of the latest calculator!</h2>
+            <section>
+                <iframe src="calc_5.html" class="calc-frame"></iframe>
+                <p class="p-strong">It can perform calculations between decimals. </p>
+                <p class="p-strong">We’ve also implemented a “⌫” function to delete a single character!</p>
+                <p class="p-strong">We’ve wrapped the CSS in @scope to make it easier to handle.</p>
+                <p class="p-note">*For calculations where the result is between -1 and 0 (e.g., 5 ÷ (-8)), incorrect results may be output. This is especially true when changing the sign (+/-).</p>
+                <p class="p-note">*The upper limit for calculation results is ±2147683647.</p>
+                <p>Well, there’s one button left over (the “?” button, for future expansion).</p>
+                <p>If I find a good use for it, I’ll implement it in the future, so please stay tuned!!</p>
+            </section>
+        </article>
+        <article id="article-05">
+            <h2>Related Works</h2>
+            <section>
+                <p>There are other projects that test the limits of CSS!</p>
+                <p>Diagnostic sites, random number generators, SPAs, tic-tac-toe, and more... coming soon!</p>
+                <p>Please look forward to the future development of this site. </p>
+            </section>
+            <h3>Tic-Tac-Toe</h3>
+            <section>
+                <iframe src="marubatsu.html" class="marubatsu-frame"></iframe>
+                <a href="marubatsu.html" target="_blank"><p class="p-link">Link</p></a>
+            </section>
+            <h3>SPA</h3>
+            <section>
+                <iframe src="font_spa.html" class="spa-frame"></iframe>
+                <a href="font_spa.html" target="_blank"><p class="p-link">Link</p></a>
+            </section>
+        </article>
+    </main>
+    <aside></aside>
+    <footer>
+        <div>© 2026 cascade-path</div>
+        <a href="https://cascade-path.github.io/portfolio/index.html" target="_blank"><div>Cascade-path's Portfolio</div></a>
+    </footer>
+</body>
+</html>
             
 
 
